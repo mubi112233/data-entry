@@ -212,7 +212,7 @@ export default function ContactClient({ lang }: { lang: string }) {
       industry: "", timeline: "",
       designRequirements: "", otherInfo: "",
     },
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const projectTypeValue = useWatch({ control, name: "projectType" });
@@ -242,13 +242,24 @@ export default function ContactClient({ lang }: { lang: string }) {
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
       const json = await res.json();
       if (json.success) {
-        toast({ title: "Success!", description: "Your message has been sent." });
+        toast({ 
+          title: lang === "ge" ? "Erfolg!" : "Success!", 
+          description: lang === "ge" ? "Ihre Nachricht wurde gesendet. Wir melden uns innerhalb von 24 Stunden." : "Your message has been sent. We'll respond within 24 hours." 
+        });
         reset();
       } else {
-        toast({ title: "Error", description: json.message || "Please try again." });
+        toast({ 
+          title: lang === "ge" ? "Fehler" : "Error", 
+          description: json.message || (lang === "ge" ? "Bitte versuchen Sie es erneut." : "Please try again."),
+          variant: "destructive"
+        });
       }
-    } catch {
-      toast({ title: "Network error", description: "Please try again later." });
+    } catch (error) {
+      toast({ 
+        title: lang === "ge" ? "Netzwerkfehler" : "Network error", 
+        description: lang === "ge" ? "Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut." : "Please check your connection and try again.",
+        variant: "destructive"
+      });
     }
   };
 
@@ -260,7 +271,7 @@ export default function ContactClient({ lang }: { lang: string }) {
 
       <Navbar />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-28 pb-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-24 sm:pt-28 pb-16 sm:pb-20">
         {/* Page Header */}
         <motion.div
           className="text-left mb-12"
@@ -271,15 +282,15 @@ export default function ContactClient({ lang }: { lang: string }) {
           <span className="inline-block px-4 py-1.5 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">
             {c.badge}
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {c.title}
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-12 items-start">
 
           {/* Left — Info Panel */}
           <motion.div
@@ -328,7 +339,7 @@ export default function ContactClient({ lang }: { lang: string }) {
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-blue-400 fill-blue-400" />)}
               </div>
               <p className="text-sm text-muted-foreground italic leading-relaxed">
-                &ldquo;SocialRecruit transformed our brand identity completely. The team's creativity and attention to detail exceeded all our expectations.&rdquo;
+                &ldquo;SocialRecruit helped us fill 15 critical positions in just 3 weeks. Their LinkedIn and Instagram sourcing strategy was incredibly effective.&rdquo;
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/30 to-blue-500/10 flex items-center justify-center">
@@ -336,7 +347,7 @@ export default function ContactClient({ lang }: { lang: string }) {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-foreground">Michael Keller</div>
-                  <div className="text-xs text-muted-foreground">CEO, TechFlow GmbH</div>
+                  <div className="text-xs text-muted-foreground">HR Director, TechFlow GmbH</div>
                 </div>
               </div>
             </div>
@@ -359,7 +370,7 @@ export default function ContactClient({ lang }: { lang: string }) {
               {/* Form header bar */}
               <div className="px-6 sm:px-8 py-5 border-b border-border/50 bg-gradient-to-r from-blue-500/5 to-transparent">
                 <h2 className="font-bold text-foreground text-lg">Fill in your details</h2>
-                <p className="text-sm text-muted-foreground mt-0.5">All fields marked are required</p>
+                <p className="text-sm text-muted-foreground mt-0.5">Fields marked with <span className="text-blue-400">*</span> are required</p>
               </div>
 
               <form className="px-6 sm:px-8 py-7 space-y-8" onSubmit={handleSubmit(onSubmit)}>
@@ -373,8 +384,9 @@ export default function ContactClient({ lang }: { lang: string }) {
                         id="contactName"
                         type="text"
                         placeholder="John Smith"
-                        className="border-border/60 focus:border-blue-400/60 transition-colors"
-                        {...register("contactName", { required: c.contactNameRequired })}
+                        className={`border-border/60 focus:border-blue-400/60 transition-colors ${errors.contactName ? 'border-destructive/50' : ''}`}
+                        aria-invalid={errors.contactName ? 'true' : 'false'}
+                        {...register("contactName", { required: c.contactNameRequired, minLength: { value: 2, message: "Name must be at least 2 characters" } })}
                       />
                       <FieldError message={errors.contactName?.message} />
                     </div>
@@ -384,7 +396,8 @@ export default function ContactClient({ lang }: { lang: string }) {
                         id="email"
                         type="email"
                         placeholder="you@company.com"
-                        className="border-border/60 focus:border-blue-400/60 transition-colors"
+                        className={`border-border/60 focus:border-blue-400/60 transition-colors ${errors.email ? 'border-destructive/50' : ''}`}
+                        aria-invalid={errors.email ? 'true' : 'false'}
                         {...register("email", {
                           required: c.emailRequired,
                           pattern: { value: emailPattern, message: c.emailInvalid },
@@ -400,8 +413,9 @@ export default function ContactClient({ lang }: { lang: string }) {
                         id="companyName"
                         type="text"
                         placeholder="Your Company GmbH"
-                        className="border-border/60 focus:border-blue-400/60 transition-colors"
-                        {...register("companyName", { required: c.companyNameRequired })}
+                        className={`border-border/60 focus:border-blue-400/60 transition-colors ${errors.companyName ? 'border-destructive/50' : ''}`}
+                        aria-invalid={errors.companyName ? 'true' : 'false'}
+                        {...register("companyName", { required: c.companyNameRequired, minLength: { value: 2, message: "Company name must be at least 2 characters" } })}
                       />
                       <FieldError message={errors.companyName?.message} />
                     </div>
@@ -411,7 +425,8 @@ export default function ContactClient({ lang }: { lang: string }) {
                         id="phone"
                         type="tel"
                         placeholder="+49 123 456 789"
-                        className="border-border/60 focus:border-blue-400/60 transition-colors"
+                        className={`border-border/60 focus:border-blue-400/60 transition-colors ${errors.phone ? 'border-destructive/50' : ''}`}
+                        aria-invalid={errors.phone ? 'true' : 'false'}
                         {...register("phone", {
                           required: c.phoneRequired,
                           pattern: { value: phonePattern, message: c.phoneInvalid },
@@ -428,7 +443,7 @@ export default function ContactClient({ lang }: { lang: string }) {
                     <div className="space-y-1.5">
                       <Label className="text-sm">{c.projectTypeLabel} <span className="text-blue-400">*</span></Label>
                       <Select onValueChange={(v) => setValue("projectType", v, { shouldValidate: true })}>
-                        <SelectTrigger className="border-border/60 focus:border-blue-400/60">
+                        <SelectTrigger className={`border-border/60 focus:border-blue-400/60 ${errors.projectType ? 'border-destructive/50' : ''}`} aria-invalid={errors.projectType ? 'true' : 'false'}>
                           <SelectValue placeholder={c.projectTypePlaceholder} />
                         </SelectTrigger>
                         <SelectContent>
@@ -478,7 +493,7 @@ export default function ContactClient({ lang }: { lang: string }) {
                     <div className="space-y-1.5">
                       <Label className="text-sm">{c.industryLabel} <span className="text-blue-400">*</span></Label>
                       <Select onValueChange={(v) => setValue("industry", v, { shouldValidate: true })}>
-                        <SelectTrigger className="border-border/60 focus:border-blue-400/60">
+                        <SelectTrigger className={`border-border/60 focus:border-blue-400/60 ${errors.industry ? 'border-destructive/50' : ''}`} aria-invalid={errors.industry ? 'true' : 'false'}>
                           <SelectValue placeholder={c.industryLabel} />
                         </SelectTrigger>
                         <SelectContent>

@@ -14,10 +14,10 @@ export async function generateMetadata({
   const { lang: raw } = await params;
   const seg = publicLocalePathSegment(raw);
   const isDE = seg === "de";
-  const title = isDE ? "Termin buchen — Kostenlose Recruiting-Beratung | SocialRecruit" : "Book a Meeting — Free Social Recruitment Consultation | SocialRecruit";
+  const title = isDE ? "Termin buchen — Kostenlose Datenerfassungs-Beratung | DataEntry Pro" : "Book a Meeting — Free Data Entry Consultation | DataEntry Pro";
   const description = isDE
-    ? "Vereinbaren Sie eine kostenlose Recruiting-Beratung mit SocialRecruit und erfahren Sie, wie wir Ihnen helfen, Top-Talente über Social Media zu finden."
-    : "Schedule a free Social Recruitment consultation with SocialRecruit and learn how we can help you find top talent through social media.";
+    ? "Buchen Sie eine kostenlose 15-minütige Datenerfassungs-Beratung mit DataEntry Pro. Wir scopieren Ihr Projekt, bestätigen Felder & SLA und liefern eine kostenlose Probe."
+    : "Schedule a free 15-minute data entry consultation with DataEntry Pro. We scope your project, confirm fields & SLA, and deliver a free sample batch.";
   const { languages } = hreflangAlternates("book-meeting");
   const canonical = absoluteUrl(`/${seg}/book-meeting`);
 
@@ -25,8 +25,8 @@ export async function generateMetadata({
     title,
     description,
     keywords: isDE
-      ? ["Recruiting-Beratung", "Strategieanruf", "SocialRecruit Termin", "Social-Media-Recruiting"]
-      : ["Social Recruitment consultation", "strategy call", "SocialRecruit meeting", "social media recruiting"],
+      ? ["Datenerfassungs-Beratung", "Strategieanruf", "DataEntry Pro Termin", "Dateneingabe Service"]
+      : ["data entry consultation", "strategy call", "DataEntry Pro meeting", "data entry service"],
     alternates: {
       canonical,
       languages,
@@ -38,8 +38,8 @@ export async function generateMetadata({
       type: "website",
       locale: isDE ? "de_DE" : "en_US",
       alternateLocale: isDE ? "en_US" : "de_DE",
-      siteName: "SocialRecruit",
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "SocialRecruit Social Recruitment" }],
+      siteName: "DataEntry Pro",
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "DataEntry Pro — Data Entry Services" }],
     },
     twitter: {
       card: "summary_large_image",

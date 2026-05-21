@@ -21,10 +21,10 @@ export const Footer: React.FC = () => {
         { label: "Contact Us", href: "/en/contact" },
       ],
       serviceLinks: [
-        { label: "recruitment management", href: "/en/#services" },
-        { label: "recruitment automation", href: "/en/#services" },
-        { label: "Campaign Management", href: "/en/#services" },
-        { label: "Response Handling", href: "/en/#services" },
+        { label: "Form & Document Processing", href: "/en/#services" },
+        { label: "Data Cleaning & Normalization", href: "/en/#services" },
+        { label: "Catalog & Listing Management", href: "/en/#services" },
+        { label: "CRM/Sheet Migration", href: "/en/#services" },
         { label: "Pricing Plans", href: "/en/#pricing" },
       ],
       resourceLinks: [
@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
         { label: "FAQ", href: "/en/#faq" },
         { label: "Testimonials", href: "/en/#testimonials" },
       ],
-      tagline: "Professional Social Media Recruitment services. Find top talent through LinkedIn, Instagram & TikTok. 80% faster hiring with expert sourcing.",
+      tagline: "Professional data entry services. Spreadsheet-style data entry with validation, clean-up, and QA. 99.9% accuracy with 24–72h turnaround.",
       rights: "All rights reserved.",
     },
     ge: {
@@ -47,10 +47,10 @@ export const Footer: React.FC = () => {
         { label: "Kontakt", href: "/de/contact" },
       ],
       serviceLinks: [
-        { label: "LinkedIn Recruiting", href: "/de/#services" },
-        { label: "Instagram Recruiting", href: "/de/#services" },
-        { label: "TikTok Recruiting", href: "/de/#services" },
-        { label: "Employer Branding", href: "/de/#services" },
+        { label: "Formular- & Dokumentenverarbeitung", href: "/de/#services" },
+        { label: "Datenbereinigung & Normalisierung", href: "/de/#services" },
+        { label: "Katalog- & Listenmanagement", href: "/de/#services" },
+        { label: "CRM/Sheet-Migration", href: "/de/#services" },
         { label: "Preispläne", href: "/de/#pricing" },
       ],
       resourceLinks: [
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
         { label: "Häufige Fragen", href: "/de/#faq" },
         { label: "Kundenstimmen", href: "/de/#testimonials" },
       ],
-      tagline: "Professionelle Social-Media-Recruiting-Dienstleistungen. Finden Sie Top-Talente über LinkedIn, Instagram & TikTok. 80% schneller einstellen.",
+      tagline: "Professionelle Datenerfassungs-Services. Tabellenähnliche Dateneingabe mit Validierung, Bereinigung und QS. 99,9 % Genauigkeit mit 24–72h Lieferzeit.",
       rights: "Alle Rechte vorbehalten.",
     },
   };
@@ -68,14 +68,14 @@ export const Footer: React.FC = () => {
   const c = links[lang];
 
   return (
-    <footer className="w-full bg-[hsl(250,50%,12%)] border-t border-white/10 mt-8">
+    <footer className="w-full bg-gradient-to-br from-green-900 via-green-900 to-green-950 border-t border-white/10 mt-8">
       <div className={`container mx-auto ${SPACING.container} py-12 sm:py-16`}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href={`/${lang}`} className="flex items-center gap-2 mb-4 group">
-              <div className="w-9 h-9 bg-[hsl(270,80%,65%)] rounded-lg flex items-center justify-center">
+              <div className="w-9 h-9 bg-gold rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-black text-lg">{siteConfig.brandMarkText}</span>
               </div>
               <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{siteConfig.brandName}</span>
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} SocialRecruit. {c.rights}</p>
+          <p>© {new Date().getFullYear()} DataEntry Pro. {c.rights}</p>
           <div className="flex items-center gap-4">
             <Link href={localizedPath(lang, siteConfig.routes.blog)} className="hover:text-primary transition-colors">Blog</Link>
             <Link href={localizedPath(lang, siteConfig.routes.contact)} className="hover:text-primary transition-colors">{isGe ? "Kontakt" : "Contact"}</Link>

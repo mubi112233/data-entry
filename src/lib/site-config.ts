@@ -17,11 +17,11 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  brandName: "SocialRecruit",
-  brandMarkText: "S",
+  brandName: "DataEntry Pro",
+  brandMarkText: "D",
   defaultLocale: "en",
   apiBase: process.env.NEXT_PUBLIC_API_BASE || "https://api.don-va.com",
-  tenantId: process.env.NEXT_PUBLIC_TENANT_ID || "socal_media_agency",
+  tenantId: process.env.NEXT_PUBLIC_TENANT_ID || "data_entry",
   routes: {
     bookMeeting: "/book-meeting",
     contact: "/contact",

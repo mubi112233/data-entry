@@ -28,33 +28,33 @@ const plans: PricingPlan[] = [
   {
     id: 'starter',
     name: "Starter",
-    hours: "Up to 3 hires/month",
-    price: 369,
-    setupFee: 149,
+    hours: "Up to 1k records/mo",
+    price: 299,
+    setupFee: 99,
     features: [
-      "Candidate Sourcing & Filtering",
-      "LinkedIn Profile Screening",
-      "Basic Outreach Automation",
-      "Candidate Response Templates",
-      "Weekly Performance Reports"
+      "Form & document processing",
+      "Basic data validation",
+      "Spreadsheet template setup",
+      "Weekly delivery",
+      "Email support"
     ],
     highlighted: false,
-    badge: "Perfect for individuals"
+    badge: "Perfect for small teams"
   },
   {
     id: 'professional',
-    name: "Professional",
-    hours: "Up to 10 hires/month",
-    price: 629,
+    name: "Growth",
+    hours: "Up to 10k records/mo",
+    price: 599,
     setupFee: 0,
     features: [
       "Everything in Starter",
-      "No Setup Fee",
-      "Multi-Platform Sourcing (LinkedIn, Instagram)",
-      "Recruitment Campaign Management",
-      "2-Hour Response Time SLA",
-      "Daily Pipeline Summaries + Analytics",
-      "Priority Support"
+      "No setup fee",
+      "Data cleaning & normalization",
+      "Catalog & listing management",
+      "CRM/Sheet migration",
+      "Second-pass QA included",
+      "Priority support"
     ],
     highlighted: true,
     badge: undefined
@@ -62,19 +62,19 @@ const plans: PricingPlan[] = [
   {
     id: 'enterprise',
     name: "Enterprise",
-    hours: "Unlimited hires",
-    price: 1169,
+    hours: "50k+ records & custom",
+    price: 1199,
     setupFee: 0,
     highlighted: false,
     badge: "Best Value",
     features: [
-      "Everything in Professional",
-      "No Setup Fee",
-      "Dedicated Recruiting Manager",
-      "Enterprise Security Protocols",
-      "Custom Integrations & API",
-      "24/7 Monitoring & Support",
-      "Custom SLAs & Compliance"
+      "Everything in Growth",
+      "No setup fee",
+      "Dedicated data entry manager",
+      "Web research & data collection",
+      "Custom integrations & API",
+      "24/7 monitoring & support",
+      "Custom SLAs & compliance"
     ]
   }
 ];
@@ -232,10 +232,10 @@ export const Pricing = () => {
             {copy.sectionBadge || "Transparent Pricing for Social Recruitment"}
           </motion.span>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 text-foreground leading-tight">
-            Simple, transparent pricing for Social Recruitment
+            {copy.sectionTitle || "Simple, Usage-Based Packages"}
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Choose a plan that fits your hiring needs. From candidate sourcing to full recruitment management.
+            {copy.sectionDescription || "Choose a data entry package sized to your volume. Scale anytime. No hidden fees."}
           </p>
         </motion.div>
 
@@ -274,12 +274,12 @@ export const Pricing = () => {
               aria-describedby="plan-count-description"
             >
               {Array.from({ length: MAX_VA_COUNT }, (_, i) => i + 1).map(num => (
-                <option 
-                  key={num} 
-                  value={num} 
+                <option
+                  key={num}
+                  value={num}
                   className="text-foreground bg-card py-2 sm:py-3"
                 >
-                  {num} {num === 1 ? 'Hiring Position' : 'Hiring Positions'}
+                  {num === 1 ? '~1k' : num <= 5 ? `~${num * 2}k` : `~${num * 5}k`} {num === 1 ? 'records/mo' : 'records/mo'}
                 </option>
               ))}
             </select>

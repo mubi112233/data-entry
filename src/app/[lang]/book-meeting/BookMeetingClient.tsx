@@ -2,20 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Calendar,
-  Clock,
-  Video,
-  CheckCircle2,
-  ArrowLeft,
-  Menu,
-  X,
-  Star,
-  Shield,
-} from "lucide-react";
+import { Calendar, Clock, Video, CheckCircle2, ArrowLeft, Menu, X, Star, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+
+const CALENDLY_URL = "https://calendly.com/d/cyhx-wdw-b57";
 
 export default function BookMeetingClient() {
   const pathname = usePathname();
@@ -34,15 +26,14 @@ export default function BookMeetingClient() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-600/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-600/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Navbar */}
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/98 backdrop-blur-2xl border-b-2 border-blue-500/20 shadow-2xl shadow-blue-500/5"
+            ? "bg-background/98 backdrop-blur-2xl border-b-2 border-green-600/20 shadow-2xl"
             : "bg-background/90 backdrop-blur-xl border-b border-border/30"
         }`}
         initial={{ y: -100 }}
@@ -53,51 +44,49 @@ export default function BookMeetingClient() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
             <Link href={homePath}>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="flex items-center space-x-3 cursor-pointer group"
-              whileHover={{ scale: 1.02 }}
-            >
               <motion.div
-                className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl group-hover:shadow-2xl group-hover:shadow-blue-500/30 transition-all duration-500"
-                whileHover={{ rotate: 5, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="flex items-center space-x-3 cursor-pointer group"
+                whileHover={{ scale: 1.02 }}
               >
-                <span className="text-white font-black text-xl sm:text-2xl">E</span>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-600 to-green-800 rounded-2xl flex items-center justify-center shadow-xl group-hover:shadow-2xl group-hover:shadow-green-600/30 transition-all duration-500"
+                  whileHover={{ rotate: 5, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="3" rx="1" fill="white" />
+                    <rect x="3" y="8" width="11" height="2" rx="1" fill="white" opacity="0.8" />
+                    <rect x="3" y="12" width="14" height="2" rx="1" fill="white" opacity="0.8" />
+                    <rect x="3" y="16" width="9" height="2" rx="1" fill="white" opacity="0.8" />
+                    <circle cx="19" cy="18" r="3" fill="#4ade80" />
+                    <path d="M17.5 18l1 1 2-2" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </motion.div>
+                <div className="flex flex-col">
+                  <span className="text-xl sm:text-2xl font-black text-green-800 dark:text-foreground group-hover:text-green-600 transition-all duration-300">
+                    DataEntry <span className="text-green-600 dark:text-green-400">Pro</span>
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-green-600/80 font-semibold -mt-1 tracking-wide">
+                    Data Entry Services
+                  </span>
+                </div>
               </motion.div>
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-foreground via-foreground to-foreground/90 bg-clip-text text-transparent group-hover:from-blue-400 group-hover:to-blue-600 transition-all duration-300">
-                  SocialRecruit
-                </span>
-                <span className="text-[10px] sm:text-xs text-blue-400/80 font-semibold -mt-1 tracking-wide">
-                  Social Recruitment
-                </span>
-              </div>
-            </motion.div>
             </Link>
+
             <div className="hidden md:flex items-center gap-2 lg:gap-6">
               <Link href={homePath}>
-                <Button
-                  variant="ghost"
-                  className="text-muted-foreground hover:text-blue-400 hover:bg-blue-500/10 transition-all duration-300 font-semibold px-4 py-2 rounded-xl group"
-                >
+                <Button variant="ghost" className="text-muted-foreground hover:text-green-600 hover:bg-green-600/10 transition-all duration-300 font-semibold px-4 py-2 rounded-xl group">
                   <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                   Home
                 </Button>
               </Link>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
-                  onClick={() =>
-                    window.open(
-                      "https://calendly.com/mmubasharshahzad40/new-meeting",
-                      "_blank",
-                      "noopener,noreferrer"
-                    )
-                  }
-                  className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-400 text-black font-bold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-blue-500/50"
+                  onClick={() => window.open(CALENDLY_URL, "_blank", "noopener,noreferrer")}
+                  className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 text-white font-bold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-600/30 transition-all duration-300 border-2 border-green-600/50"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
                   Book Now
@@ -109,7 +98,7 @@ export default function BookMeetingClient() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden relative w-11 h-11 rounded-xl border border-border/50 hover:border-blue-400/50 hover:bg-blue-500/5 transition-all duration-300"
+              className="md:hidden relative w-11 h-11 rounded-xl border border-border/50 hover:border-green-600/50 hover:bg-green-600/5 transition-all duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <AnimatePresence mode="wait">
@@ -121,11 +110,7 @@ export default function BookMeetingClient() {
                   transition={{ duration: 0.3, type: "spring" }}
                   className="flex items-center justify-center"
                 >
-                  {mobileMenuOpen ? (
-                    <X className="h-5 w-5 text-blue-400" />
-                  ) : (
-                    <Menu className="h-5 w-5 text-foreground" />
-                  )}
+                  {mobileMenuOpen ? <X className="h-5 w-5 text-green-600" /> : <Menu className="h-5 w-5 text-foreground" />}
                 </motion.div>
               </AnimatePresence>
             </Button>
@@ -139,39 +124,25 @@ export default function BookMeetingClient() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.4, type: "spring" }}
-                className="md:hidden border-t-2 border-blue-500/20 bg-background/95 backdrop-blur-xl"
+                className="md:hidden border-t-2 border-green-600/20 bg-background/95 backdrop-blur-xl"
               >
                 <div className="py-6 space-y-4">
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="px-4"
-                  >
+                  <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="px-4">
                     <Button
                       onClick={() => {
-                        document
-                          .querySelector("iframe[title='Book a meeting']")
-                          ?.scrollIntoView({ behavior: "smooth" });
+                        document.querySelector("iframe[title='Book a meeting']")?.scrollIntoView({ behavior: "smooth" });
                         setMobileMenuOpen(false);
                       }}
-                      className="w-full bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-400 text-black font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="w-full bg-gradient-to-r from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       <Calendar className="w-5 h-5 mr-2" />
-                      Book Your Meeting Now
+                      Book Your Consult Now
                     </Button>
                   </motion.div>
                   <div className="h-px bg-border/50 mx-4" />
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
+                  <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
                     <Link href={homePath} onClick={() => setMobileMenuOpen(false)} className="w-full">
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-muted-foreground hover:text-blue-400 hover:bg-blue-500/5 py-3 rounded-xl transition-all duration-300 group"
-                      >
+                      <Button variant="ghost" className="w-full justify-start text-muted-foreground hover:text-green-600 hover:bg-green-600/5 py-3 rounded-xl transition-all duration-300 group">
                         <ArrowLeft className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform duration-300" />
                         <span className="font-semibold">Back to Home</span>
                       </Button>
@@ -196,10 +167,10 @@ export default function BookMeetingClient() {
           >
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-foreground">
-                Book Your Consultation
+                Book Your Free Data Entry Consult
               </h2>
               <p className="text-base text-muted-foreground leading-relaxed">
-                Schedule a free 15-minute call to discuss how we can help your business.
+                Schedule a free 15-minute call to scope your project, confirm fields & SLA, and get a free sample batch.
               </p>
             </div>
 
@@ -208,13 +179,13 @@ export default function BookMeetingClient() {
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4">What to Expect</h3>
               <div className="space-y-4">
                 {[
-                  { icon: Clock, title: "15-Minute Session", desc: "Quick, focused discussion about your needs" },
+                  { icon: Clock, title: "15-Minute Session", desc: "Quick scoping call to confirm fields, volume & SLA" },
                   { icon: Video, title: "Virtual Meeting", desc: "Join via Google Meet or Zoom" },
-                  { icon: CheckCircle2, title: "No Commitment", desc: "Free consultation with no obligations" },
+                  { icon: CheckCircle2, title: "Free Sample Included", desc: "We deliver a sample batch so you can review quality before committing" },
                 ].map(({ icon: Icon, title, desc }) => (
                   <div key={title} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-blue-400" />
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-600/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-green-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-base text-foreground mb-1">{title}</h4>
@@ -226,19 +197,19 @@ export default function BookMeetingClient() {
             </div>
 
             {/* We'll Discuss */}
-            <div className="space-y-4 p-5 sm:p-6 bg-blue-500/5 border border-blue-500/20 rounded-xl">
+            <div className="space-y-4 p-5 sm:p-6 bg-green-600/5 border border-green-600/20 rounded-xl">
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4">We&apos;ll Discuss</h3>
               <ul className="space-y-3">
                 {[
-                  "Your current hiring challenges & open positions",
-                  "How social media sourcing can transform your recruitment",
-                  "Custom sourcing strategies for your needs",
-                  "Pricing & team structure options",
-                  "Next steps to get started",
+                  "Your data entry project scope & volume",
+                  "Field mapping, validation rules & delivery format",
+                  "Turnaround time & SLA confirmation",
+                  "Free sample batch to review quality",
+                  "Pricing & next steps to get started",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-blue-500" />
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5">
+                      <div className="w-2 h-2 rounded-full bg-green-600" />
                     </div>
                     <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
                   </li>
@@ -249,12 +220,12 @@ export default function BookMeetingClient() {
             {/* Trust Indicators */}
             <div className="grid grid-cols-3 gap-4 pt-4">
               {[
-                { value: "50+", label: "Clients" },
-                { value: "250+", label: "Projects" },
-                { value: "4.9/5", label: "Rating" },
+                { value: "5M+", label: "Records Processed" },
+                { value: "500+", label: "Clients" },
+                { value: "99.9%", label: "Accuracy" },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center p-4 bg-card border border-border rounded-lg">
-                  <div className="text-2xl font-bold text-blue-400">{value}</div>
+                  <div className="text-2xl font-bold text-green-600">{value}</div>
                   <div className="text-xs text-muted-foreground mt-1">{label}</div>
                 </div>
               ))}
@@ -266,15 +237,15 @@ export default function BookMeetingClient() {
             <div className="lg:sticky lg:top-24">
               <div className="bg-card border border-border rounded-xl p-2 shadow-lg">
                 <iframe
-                  src="https://calendly.com/SocialRecruit/recruitment-consultation?embed_domain=don-sr.com&embed_type=Inline"
+                  src={`${CALENDLY_URL}?embed_type=Inline`}
                   className="rounded-lg"
                   style={{ minWidth: "100%", height: "600px", border: "none" }}
                   title="Book a meeting"
                 />
               </div>
-              <div className="mt-4 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg text-center">
+              <div className="mt-4 p-4 bg-green-600/5 border border-green-600/20 rounded-lg text-center">
                 <p className="text-sm text-muted-foreground">
-                  <Shield className="w-4 h-4 inline mr-2 text-blue-400" />
+                  <Shield className="w-4 h-4 inline mr-2 text-green-600" />
                   <span className="font-semibold text-foreground">100% Secure & Confidential</span>
                 </p>
               </div>
@@ -290,29 +261,27 @@ export default function BookMeetingClient() {
           transition={{ duration: 0.8, delay: 0.9 }}
         >
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-foreground">
-              What Our Clients Say
-            </h2>
-            <p className="text-muted-foreground">See why brands trust SocialRecruit</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-foreground">What Our Clients Say</h2>
+            <p className="text-muted-foreground">See why 500+ teams trust DataEntry Pro</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                name: "Sarah Johnson",
-                role: "CEO, TechStart Inc",
-                text: "SocialRecruit transformed our hiring completely. We went from struggling to find candidates to a qualified pipeline every day.",
+                name: "Markus Weber",
+                role: "Operations Manager, EuroShop GmbH",
+                text: "DataEntry Pro normalized our 50,000 SKUs in just 5 days. Near-zero errors on final delivery — exactly what we needed.",
                 rating: 5,
               },
               {
-                name: "Michael Chen",
-                role: "Founder, Digital Growth",
-                text: "Best decision we made. Our team productivity has grown significantly within weeks.",
+                name: "Sandra Hoffmann",
+                role: "Head of Data, Apex Consulting AG",
+                text: "120,000 contacts cleaned and imported into HubSpot on time and on budget. The free sample gave us full confidence before we committed.",
                 rating: 5,
               },
               {
-                name: "Emma Davis",
-                role: "Director, MarketPro",
-                text: "Professional, efficient, and detail-oriented. Couldn't ask for more from an Social Recruitment partner.",
+                name: "Thomas Braun",
+                role: "Research Director, ResearchFirst GmbH",
+                text: "8,000 survey forms digitized and validated in 3 days. Responsive team and top-notch quality control throughout.",
                 rating: 5,
               },
             ].map((t, idx) => (
@@ -321,17 +290,17 @@ export default function BookMeetingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + idx * 0.1 }}
-                className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 hover:border-blue-400/50 hover:shadow-lg transition-all duration-300"
+                className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 hover:border-green-600/50 hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex gap-1 mb-4">
                   {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-blue-400 fill-blue-400" />
+                    <Star key={i} className="w-4 h-4 text-green-600 fill-green-600" />
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/30 to-blue-500/10 flex items-center justify-center">
-                    <span className="text-blue-400 font-bold text-sm">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-600/30 to-green-600/10 flex items-center justify-center">
+                    <span className="text-green-600 font-bold text-sm">
                       {t.name.split(" ").map((n) => n[0]).join("")}
                     </span>
                   </div>

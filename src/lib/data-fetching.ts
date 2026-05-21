@@ -165,30 +165,30 @@ export async function fetchFAQData(lang: string): Promise<FAQItem[]> {
 const fallbackCaseStudies: CaseStudyCard[] = [
   {
     id: 1,
-    title: "Fortune 500 LinkedIn Recruiting Transformation",
-    company: "TechCorp Industries",
-    industry: "Executive Management",
-    challenge: "Complete social media recruiting overhaul for a C-suite executive struggling to find qualified candidates, achieving daily qualified pipeline in 5 days.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop&q=80",
-    stats: { costSaved: "75%", timeframe: "5 days", vaCount: "2 VAs" }
+    title: "50k Product SKUs Normalized for eCommerce Brand",
+    company: "EuroShop GmbH",
+    industry: "eCommerce",
+    challenge: "Normalized 50,000 product SKUs across 12 categories, eliminating duplicate entries and standardizing attribute fields for a major European online retailer.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
+    stats: { costSaved: "99.9%", timeframe: "5 days", vaCount: "3 operators" }
   },
   {
     id: 2,
-    title: "Marketing Team Social Recruiting Success",
-    company: "Berlin Marketing Agency",
-    industry: "Marketing",
-    challenge: "Social media recruiting automation for a Berlin marketing agency, streamlining candidate sourcing and campaign management across LinkedIn and Instagram.",
+    title: "CRM Migration: 120k Contacts Cleaned & Imported",
+    company: "Apex Consulting AG",
+    industry: "Professional Services",
+    challenge: "Migrated 120,000 contacts from legacy spreadsheets into HubSpot CRM with deduplication, field mapping, and second-pass QA validation.",
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&q=80",
-    stats: { costSaved: "+200%", timeframe: "2 weeks", vaCount: "3 VAs" }
+    stats: { costSaved: "60% cost", timeframe: "2 weeks", vaCount: "2 operators" }
   },
   {
     id: 3,
-    title: "Startup Founder recruitment efficiency",
-    company: "Munich Tech Startup",
-    industry: "Technology",
-    challenge: "Social media recruiting system for a busy Munich tech founder, organizing candidate pipeline and priority outreach across platforms.",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&q=80",
-    stats: { costSaved: "65%", timeframe: "3 days", vaCount: "1 VA" }
+    title: "Survey Data Processing: 8,000 Responses Digitized",
+    company: "ResearchFirst GmbH",
+    industry: "Market Research",
+    challenge: "Digitized and validated 8,000 paper survey responses with OCR-assisted entry, cross-field validation rules, and structured CSV delivery.",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&q=80",
+    stats: { costSaved: "48h turnaround", timeframe: "3 days", vaCount: "4 operators" }
   }
 ];
 

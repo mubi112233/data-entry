@@ -1,63 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, UserCheck, Rocket, LineChart, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Calendar, UserCheck, Rocket, LineChart } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { fetchHowItWorks, type Step } from "@/lib/api";
+import { dummyHowItWorks } from "@/data/dummy";
 
-const iconMap = {
-  Calendar,
-  UserCheck,
-  Rocket,
-  LineChart
-};
+const iconMap = { Calendar, UserCheck, Rocket, LineChart };
 
 const sectionCopy = {
-  en: {
-    badge: "Social Recruitment in 4 Steps",
-    heading: "How It Works",
-    description: "From discovery to launch in weeks—not months. Clear milestones and measurable results.",
-  },
-  ge: {
-    badge: "Social-Media-Recruiting in 4 Schritten",
-    heading: "So funktioniert's",
-    description: "Von der Entdeckung bis zum Launch in Wochen – nicht Monaten. Klare Meilensteine und messbare Ergebnisse.",
-  },
+  en: { badge: "Data Entry in 4 Steps", heading: "How It Works", description: "From scoping to delivery in 24–72 hours for most projects. Clear rules, consistent outputs, and measurable quality." },
+  ge: { badge: "Dateneingabe in 4 Schritten", heading: "So funktioniert's", description: "Von der Planung bis zur Lieferung in 24–72 Stunden bei den meisten Projekten. Klare Regeln, konsistente Ergebnisse und messbare Qualität." },
 };
 
 export const HowItWorks = () => {
-  const [steps, setSteps] = useState<Step[]>([]);
-  const [loading, setLoading] = useState(true);
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
-  const copy = sectionCopy[currentLang as keyof typeof sectionCopy] || sectionCopy.en;
-
-  useEffect(() => {
-    const fetchSteps = async () => {
-      try {
-        const data = await fetchHowItWorks(currentLang);
-        setSteps(data?.steps || []);
-      } catch {
-        setSteps([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSteps();
-  }, [currentLang]);
-
-  if (loading) {
-    return (
-      <section id="how-it-works" className="relative py-4 sm:py-6 md:py-8 lg:py-10 z-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center">
-            <Loader2 className="w-8 h-8 animate-spin text-primary" />
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const copy = sectionCopy[currentLang as keyof typeof sectionCopy];
+  const displaySteps = dummyHowItWorks[currentLang as keyof typeof dummyHowItWorks];
 
   return (
     <motion.section
@@ -88,7 +47,7 @@ export const HowItWorks = () => {
         </motion.div>
 
         <div className="max-w-5xl mx-auto">
-          {steps.map((step, index) => {
+          {displaySteps.map((step, index) => {
             const IconComponent = iconMap[step.icon as keyof typeof iconMap] || Calendar;
             return (
               <motion.div
@@ -131,7 +90,7 @@ export const HowItWorks = () => {
                   </motion.div>
                 </div>
 
-                {index < steps.length - 1 && (
+                {index < displaySteps.length - 1 && (
                   <motion.div
                     className="absolute left-16 top-32 w-0.5 h-16 bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block"
                     initial={{ scaleY: 0 }}

@@ -8,112 +8,55 @@ import {
   TrendingUp,
   Award,
 } from "lucide-react";
-import {
-  siteConfig,
-  localizedPath,
-  withLocalePrefix,
-  getWhatsAppUrl,
-  type SiteLocale,
-} from "@/lib/site-config";
-import { fetchFinalCtaSectionData, type FinalCtaSectionPayload } from "@/lib/data-fetching";
+import { localizedPath, siteConfig, type SiteLocale } from "@/lib/site-config";
 
-const fallbackCopy = {
+const copy = {
   en: {
-    badge: "Ready to Hire Top Talent?",
-    headlineLine1: "Let's Transform",
-    headlineLine2: "Your Recruitment",
-    subheading:
-      "Book your free strategy call and discover how we can save you 80% recruiting time with professional social media sourcing.",
-    benefits: ["Free strategy call", "Custom sourcing strategy", "500+ companies served", "80% time savings"],
-    stats: { activeClients: "500+", avgRoi: "80%", satisfaction: "98%", fastStart: "3d" },
-    statsLabels: {
-      activeClients: "Companies Served",
-      avgRoi: "Time Savings",
-      satisfaction: "Satisfaction",
-      fastStart: "Setup Time",
-    },
+    badge: "Start Your Data Entry Today",
+    headlineLine1: "Ready for Clean,",
+    headlineLine2: "Accurate Data?",
+    subheading: "Get spreadsheet-style data delivered in 24–72 hours. Join 500+ teams shipping clean datasets with our proven data entry workflows.",
+    benefits: ["Free sample included", "Template & field mapping", "99.9% accuracy QA", "24–72h turnaround"],
+    stats: { activeClients: "5M+", avgRoi: "99.9%", satisfaction: "98%", fastStart: "24h" },
+    statsLabels: { activeClients: "Records Processed", avgRoi: "Accuracy (QA)", satisfaction: "Satisfaction", fastStart: "Avg. Turnaround" },
     trust: {
-      consultationTime: "15 Min.",
-      consultationLabel: "Free strategy call",
-      responseTime: "Online now",
+      consultationTime: "Free consultation",
+      consultationLabel: "15-min data entry consult",
+      responseTime: "Avg. response time",
       responseLabel: "Response in < 2h",
       noCommitment: "No commitment",
-      noCommitmentLabel: "Cancel anytime",
-      footer: "No credit card required. Book your free strategy call today.",
+      noCommitmentLabel: "Zero pressure",
+      footer: "Join 500+ teams shipping clean datasets with our proven data entry workflows.",
     },
-    primaryCta: "Book Free Strategy Call",
-    secondaryCta: "Chat on WhatsApp",
+    primaryCta: "Book Data Entry Consult (15 min)",
+    secondaryCta: "Quick WhatsApp Chat",
   },
   ge: {
-    badge: "Bereit, Top-Talente zu finden?",
-    headlineLine1: "Lassen Sie uns Ihre",
-    headlineLine2: "Recruiting transformieren",
-    subheading:
-      "Buchen Sie Ihren kostenlosen Strategieanruf und entdecken Sie, wie wir Ihnen 80% Recruiting-Zeit sparen können.",
-    benefits: ["Kostenloser Strategieanruf", "Maßgeschneiderte Sourcing-Strategie", "500+ Unternehmen bedient", "80% Zeitersparnis"],
-    stats: { activeClients: "500+", avgRoi: "80%", satisfaction: "98%", fastStart: "3d" },
-    statsLabels: {
-      activeClients: "Unternehmen bedient",
-      avgRoi: "Zeitersparnis",
-      satisfaction: "Zufriedenheit",
-      fastStart: "Setup-Zeit",
-    },
+    badge: "Starten Sie heute mit der Datenerfassung",
+    headlineLine1: "Bereit für saubere,",
+    headlineLine2: "präzise Daten?",
+    subheading: "Erhalten Sie tabellenähnliche Daten in 24–72 Stunden. Schließen Sie sich 500+ Teams an, die mit unseren bewährten Workflows saubere Datensätze liefern.",
+    benefits: ["Kostenlose Probe inklusive", "Vorlage & Feld-Mapping", "99,9 % QS-Genauigkeit", "24–72h Lieferzeit"],
+    stats: { activeClients: "5M+", avgRoi: "99,9%", satisfaction: "98%", fastStart: "24h" },
+    statsLabels: { activeClients: "Verarbeitete Datensätze", avgRoi: "Genauigkeit (QS)", satisfaction: "Zufriedenheit", fastStart: "Ø Lieferzeit" },
     trust: {
-      consultationTime: "15 Min.",
-      consultationLabel: "Kostenloser Strategieanruf",
-      responseTime: "Jetzt online",
+      consultationTime: "Kostenlose Beratung",
+      consultationLabel: "15-Min Datenerfassungs-Beratung",
+      responseTime: "Ø Antwortzeit",
       responseLabel: "Antwort in < 2 Std.",
-      noCommitment: "Keine Bindung",
-      noCommitmentLabel: "Jederzeit kündbar",
-      footer: "Keine Kreditkarte erforderlich. Buchen Sie noch heute Ihren kostenlosen Strategieanruf.",
+      noCommitment: "Keine Verpflichtung",
+      noCommitmentLabel: "Kein Druck",
+      footer: "Schließen Sie sich 500+ Teams an, die mit unseren bewährten Workflows saubere Datensätze liefern.",
     },
-    primaryCta: "Kostenlosen Audit buchen",
-    secondaryCta: "Per WhatsApp chatten",
+    primaryCta: "Datenerfassungs-Beratung buchen (15 Min)",
+    secondaryCta: "Schneller WhatsApp-Chat",
   },
 };
 
-function mergeFinalCta(
-  locale: SiteLocale,
-  api: FinalCtaSectionPayload | null
-): {
-  badge: string;
-  headlineLine1: string;
-  headlineLine2: string;
-  subheading: string;
-  benefits: string[];
-  stats: { activeClients: string; avgRoi: string; satisfaction: string; fastStart: string };
-  trust: (typeof fallbackCopy.en)["trust"];
-  primaryCta: string;
-  primaryHref: string;
-  secondaryCta: string;
-  secondaryHref: string;
-  statsLabels: (typeof fallbackCopy.en)["statsLabels"];
-} {
-  const fb = fallbackCopy[locale] || fallbackCopy.en;
-  return {
-    badge: api?.badge ?? fb.badge,
-    headlineLine1: api?.headlineLine1 ?? fb.headlineLine1,
-    headlineLine2: api?.headlineLine2 ?? fb.headlineLine2,
-    subheading: api?.subheading ?? fb.subheading,
-    benefits: api?.benefits?.length ? api.benefits : fb.benefits,
-    stats: { ...fb.stats, ...api?.stats },
-    trust: { ...fb.trust, ...api?.trust },
-    primaryCta: api?.ctas?.primaryLabel ?? fb.primaryCta,
-    primaryHref: api?.ctas?.primaryHref
-      ? withLocalePrefix(api.ctas.primaryHref, locale)
-      : localizedPath(locale, siteConfig.routes.bookMeeting),
-    secondaryCta: api?.ctas?.secondaryLabel ?? fb.secondaryCta,
-    secondaryHref: api?.ctas?.secondaryHref
-      ? withLocalePrefix(api.ctas.secondaryHref, locale)
-      : getWhatsAppUrl(api?.whatsAppNumber || siteConfig.external.whatsappNumber) ?? "#",
-    statsLabels: fb.statsLabels,
-  };
-}
-
 export async function FinalCTA({ lang }: { lang: string }) {
   const locale: SiteLocale = lang === "ge" ? "ge" : "en";
-  const apiData = await fetchFinalCtaSectionData(lang);
-  const c = mergeFinalCta(locale, apiData);
+  const c = copy[locale];
+  const primaryHref = localizedPath(locale, siteConfig.routes.bookMeeting);
 
   const statsItems = [
     { Icon: Users, value: c.stats.activeClients, label: c.statsLabels.activeClients },
@@ -123,7 +66,7 @@ export async function FinalCTA({ lang }: { lang: string }) {
   ];
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f172a]">
+    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-gradient-to-br from-green-900 via-green-900 to-green-950">
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute inset-0 opacity-5"
@@ -133,14 +76,14 @@ export async function FinalCTA({ lang }: { lang: string }) {
             backgroundSize: "50px 50px",
           }}
         />
-        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[hsl(221,54%,53%)]/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-16 -left-16 w-60 h-60 bg-[hsl(221,54%,53%)]/10 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-green-700/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-16 -left-16 w-60 h-60 bg-green-700/10 rounded-full blur-3xl" />
       </div>
 
       <div className="w-full px-0 relative z-10">
         <div className="max-w-6xl mx-auto text-center px-4 sm:px-6">
           <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="px-5 py-2.5 bg-[hsl(221,54%,53%)] backdrop-blur-lg rounded-full text-sm font-bold text-white flex items-center gap-2 shadow-xl">
+            <div className="px-5 py-2.5 bg-green-600 backdrop-blur-lg rounded-full text-sm font-bold text-white flex items-center gap-2 shadow-xl">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{c.badge}</span>
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -150,7 +93,7 @@ export async function FinalCTA({ lang }: { lang: string }) {
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 sm:mb-8 text-white leading-[1.1]">
             <span className="block drop-shadow-lg">{c.headlineLine1}</span>
             <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-gradient-to-r from-[hsl(221,54%,53%)] via-[hsl(221,54%,60%)] to-[hsl(221,54%,53%)] bg-clip-text text-transparent drop-shadow-2xl">
+              <span className="relative z-10 bg-gradient-to-r from-green-400 via-green-300 to-green-400 bg-clip-text text-transparent drop-shadow-2xl">
                 {c.headlineLine2}
               </span>
             </span>
@@ -164,9 +107,9 @@ export async function FinalCTA({ lang }: { lang: string }) {
               {c.benefits.map((benefit, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 bg-[hsl(221,54%,53%)]/20 backdrop-blur-md rounded-full px-4 py-2 border border-[hsl(221,54%,53%)]/30 hover:bg-[hsl(221,54%,53%)]/30 transition-all duration-300"
+                  className="flex items-center gap-2 bg-green-600/20 backdrop-blur-md rounded-full px-4 py-2 border border-green-600/30 hover:bg-green-600/30 transition-all duration-300"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[hsl(221,54%,60%)] flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
                   <span className="text-white text-sm font-semibold whitespace-nowrap">{benefit}</span>
                 </div>
               ))}
@@ -175,17 +118,15 @@ export async function FinalCTA({ lang }: { lang: string }) {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <a
-              href={c.primaryHref}
-              className="inline-flex items-center justify-center gap-3 bg-[hsl(221,54%,53%)] text-white hover:bg-[hsl(221,54%,60%)] hover:scale-[1.08] px-8 sm:px-12 py-6 sm:py-8 text-base sm:text-lg font-extrabold rounded-2xl shadow-xl transition-all duration-300 border-2 border-[hsl(221,54%,53%)]/30 w-full sm:w-auto"
+              href={primaryHref}
+              className="inline-flex items-center justify-center gap-3 bg-green-600 text-white hover:bg-green-500 hover:scale-[1.08] px-8 sm:px-12 py-6 sm:py-8 text-base sm:text-lg font-extrabold rounded-2xl shadow-xl transition-all duration-300 border-2 border-green-600/30 w-full sm:w-auto"
             >
               <span>{c.primaryCta}</span>
               <ArrowRight className="h-5 w-5" />
             </a>
             <a
-              href={c.secondaryHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[hsl(221,54%,53%)]/10 border-2 border-[hsl(221,54%,53%)]/30 text-white hover:bg-[hsl(221,54%,53%)] hover:text-white hover:scale-[1.08] px-6 sm:px-10 py-6 sm:py-8 text-base sm:text-lg font-bold rounded-2xl backdrop-blur-lg transition-all duration-300 w-full sm:w-auto"
+              href="#contact"
+              className="inline-flex items-center justify-center gap-3 bg-green-600/10 border-2 border-green-600/30 text-white hover:bg-green-600 hover:text-white hover:scale-[1.08] px-6 sm:px-10 py-6 sm:py-8 text-base sm:text-lg font-bold rounded-2xl backdrop-blur-lg transition-all duration-300 w-full sm:w-auto"
             >
               <MessageCircle className="h-5 w-5" />
               <span>{c.secondaryCta}</span>
@@ -196,9 +137,9 @@ export async function FinalCTA({ lang }: { lang: string }) {
             {statsItems.map((stat, i) => (
               <div
                 key={i}
-                className="bg-[hsl(221,54%,53%)]/15 backdrop-blur-lg border border-[hsl(221,54%,53%)]/30 rounded-2xl p-4 sm:p-6 hover:bg-[hsl(221,54%,53%)]/25 transition-all duration-300 group"
+                className="bg-green-600/15 backdrop-blur-lg border border-green-600/30 rounded-2xl p-4 sm:p-6 hover:bg-green-600/25 transition-all duration-300 group"
               >
-                <stat.Icon className="w-6 h-6 sm:w-8 sm:h-8 text-[hsl(221,54%,60%)] mb-2 mx-auto group-hover:scale-110 transition-transform duration-300" />
+                <stat.Icon className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mb-2 mx-auto group-hover:scale-110 transition-transform duration-300" />
                 <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-xs sm:text-sm text-white/80">{stat.label}</div>
               </div>
@@ -206,27 +147,27 @@ export async function FinalCTA({ lang }: { lang: string }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center gap-3 text-white/90 bg-[hsl(221,54%,53%)]/10 backdrop-blur-md rounded-xl p-4 border border-[hsl(221,54%,53%)]/20 hover:bg-[hsl(221,54%,53%)]/15 transition-all duration-300">
-              <div className="p-2 bg-[hsl(221,54%,53%)]/20 rounded-lg">
-                <Clock className="w-5 h-5 text-[hsl(221,54%,60%)] flex-shrink-0" />
+            <div className="flex items-center justify-center gap-3 text-white/90 bg-green-600/10 backdrop-blur-md rounded-xl p-4 border border-green-600/20 hover:bg-green-600/15 transition-all duration-300">
+              <div className="p-2 bg-green-600/20 rounded-lg">
+                <Clock className="w-5 h-5 text-green-400 flex-shrink-0" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-white text-base">{c.trust.consultationTime}</div>
                 <div className="text-sm text-white/80">{c.trust.consultationLabel}</div>
               </div>
             </div>
-            <div className="flex items-center justify-center gap-3 text-white/90 bg-[hsl(221,54%,53%)]/10 backdrop-blur-md rounded-xl p-4 border border-[hsl(221,54%,53%)]/20 hover:bg-[hsl(221,54%,53%)]/15 transition-all duration-300">
-              <div className="p-2 bg-[hsl(221,54%,53%)]/20 rounded-lg">
-                <div className="w-5 h-5 rounded-full bg-[hsl(221,54%,60%)] animate-pulse flex-shrink-0" />
+            <div className="flex items-center justify-center gap-3 text-white/90 bg-green-600/10 backdrop-blur-md rounded-xl p-4 border border-green-600/20 hover:bg-green-600/15 transition-all duration-300">
+              <div className="p-2 bg-green-600/20 rounded-lg">
+                <div className="w-5 h-5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-white text-base">{c.trust.responseTime}</div>
                 <div className="text-sm text-white/80">{c.trust.responseLabel}</div>
               </div>
             </div>
-            <div className="flex items-center justify-center gap-3 text-white/90 bg-[hsl(221,54%,53%)]/10 backdrop-blur-md rounded-xl p-4 border border-[hsl(221,54%,53%)]/20 hover:bg-[hsl(221,54%,53%)]/15 transition-all duration-300">
-              <div className="p-2 bg-[hsl(221,54%,53%)]/20 rounded-lg">
-                <CheckCircle2 className="w-5 h-5 text-[hsl(221,54%,60%)] flex-shrink-0" />
+            <div className="flex items-center justify-center gap-3 text-white/90 bg-green-600/10 backdrop-blur-md rounded-xl p-4 border border-green-600/20 hover:bg-green-600/15 transition-all duration-300">
+              <div className="p-2 bg-green-600/20 rounded-lg">
+                <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-white text-base">{c.trust.noCommitment}</div>
@@ -237,7 +178,7 @@ export async function FinalCTA({ lang }: { lang: string }) {
 
           <p className="mt-8 text-white/80 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-medium">
             <span className="flex items-center justify-center gap-2 flex-wrap">
-              <CheckCircle2 className="w-4 h-4 text-[hsl(221,54%,60%)]" />
+              <CheckCircle2 className="w-4 h-4 text-green-400" />
               {c.trust.footer}
             </span>
           </p>
@@ -246,5 +187,3 @@ export async function FinalCTA({ lang }: { lang: string }) {
     </section>
   );
 }
-
-

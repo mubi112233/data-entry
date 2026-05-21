@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { fetchBlog } from "@/lib/api";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
+import { dummyBlogs } from "@/data/dummy";
 
 const decodeHtml = (value: string) => {
   if (!value) return value;
@@ -30,92 +29,11 @@ const slugify = (title: string) => {
     .trim();
 };
 
-interface BlogPost {
-  blogId: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  date: string;
-  readTime: string;
-  category: string;
-  image: string;
-  charts?: any;
-  order?: number;
-  id?: number | string;
-  sections?: { heading: string; details: string }[];
-}
-
 export const Blog = () => {
   const pathname = usePathname();
   const currentLang = pathname.startsWith("/ge") || pathname.startsWith("/de") ? "ge" : "en";
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const copy = getCopy(currentLang, "blog");
-
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await fetchBlog(currentLang);
-
-        if (!data) throw new Error("Failed to fetch blogs");
-
-        const fetchedBlogs = Array.isArray((data as any).blogs)
-          ? (data as any).blogs.sort(
-              (a: BlogPost, b: BlogPost) =>
-                (a.order || 0) - (b.order || 0) || a.blogId - b.blogId
-            )
-          : [];
-
-        setPosts(fetchedBlogs);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load blogs");
-        setPosts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-  }, [currentLang]);
-
-  if (loading) {
-    return (
-      <motion.section
-        id="blog"
-        className={`relative ${SPACING.section} bg-background overflow-hidden`}
-      >
-        <div className={`container mx-auto ${SPACING.container}`}>
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-[hsl(270,80%,75%)]" />
-          </div>
-        </div>
-      </motion.section>
-    );
-  }
-
-  if (error || posts.length === 0) {
-    return (
-      <motion.section
-        id="blog"
-        className={`relative ${SPACING.section} bg-background overflow-hidden`}
-      >
-        <div className={`container mx-auto ${SPACING.container}`}>
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">
-              {error || (currentLang === "ge"
-                ? "Keine Blog-Artikel verfügbar."
-                : "No blog posts available.")}
-            </p>
-          </div>
-        </div>
-      </motion.section>
-    );
-  }
+  const posts = dummyBlogs[currentLang as keyof typeof dummyBlogs];
 
   return (
     <motion.section
@@ -144,7 +62,7 @@ export const Blog = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {posts.map((post: BlogPost, index: number) => (
+          {posts.map((post, index: number) => (
             <motion.div
               key={`${post.blogId || post.id || 'post'}-${index}`}
               initial={{ opacity: 0, y: 50 }}
@@ -158,13 +76,17 @@ export const Blog = () => {
               >
                 {/* Image */}
                 <div className="relative h-44 sm:h-52 md:h-48 lg:h-56 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  {post.image ? (
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted" />
+                  )}
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
                       {post.category}

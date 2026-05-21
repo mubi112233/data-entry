@@ -5,27 +5,28 @@ import { usePathname } from "next/navigation";
 import { SPACING } from "@/lib/constants";
 
 const tools = [
-  { name: "LinkedIn", category: "Social Platform" },
-  { name: "Meta Ads", category: "Social Platform" },
-  { name: "TikTok", category: "Social Platform" },
-  { name: "Instagram", category: "Social Platform" },
-  { name: "Google Ads", category: "Advertising" },
-  { name: "Snapchat", category: "Social Platform" },
-  { name: "Greenhouse", category: "ATS" },
-  { name: "Lever", category: "ATS" },
-  { name: "Workable", category: "ATS" },
-  { name: "BambooHR", category: "HR Platform" },
+  { name: "Google Sheets", category: "Spreadsheet" },
+  { name: "Microsoft Excel", category: "Spreadsheet" },
+  { name: "Airtable", category: "Database" },
   { name: "HubSpot", category: "CRM" },
-  { name: "Slack", category: "Communication" },
+  { name: "Salesforce", category: "CRM" },
+  { name: "Notion", category: "Database" },
+  { name: "CSV / TSV", category: "File Format" },
+  { name: "OCR Tools", category: "Digitization" },
+  { name: "Zapier", category: "Automation" },
+  { name: "Make", category: "Automation" },
+  { name: "Shopify", category: "eCommerce" },
+  { name: "WooCommerce", category: "eCommerce" },
 ];
 
 const categoryLabels: Record<string, { en: string; ge: string }> = {
-  "Social Platform":     { en: "Social Platform",     ge: "Social-Media-Plattform" },
-  "Advertising":         { en: "Advertising",         ge: "Werbung" },
-  "ATS":                 { en: "ATS",                 ge: "ATS" },
-  "HR Platform":         { en: "HR Platform",         ge: "HR-Plattform" },
-  "CRM":                 { en: "CRM",                 ge: "CRM" },
-  "Communication":       { en: "Communication",       ge: "Kommunikation" },
+  "Spreadsheet":  { en: "Spreadsheet",  ge: "Tabellenkalkulation" },
+  "Database":     { en: "Database",     ge: "Datenbank" },
+  "CRM":          { en: "CRM",          ge: "CRM" },
+  "File Format":  { en: "File Format",  ge: "Dateiformat" },
+  "Digitization": { en: "Digitization", ge: "Digitalisierung" },
+  "Automation":   { en: "Automation",   ge: "Automatisierung" },
+  "eCommerce":    { en: "eCommerce",    ge: "eCommerce" },
 };
 
 export const ToolsIntegration = () => {
@@ -54,15 +55,15 @@ export const ToolsIntegration = () => {
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-foreground">
             {isGe ? (
-              <>Expertise in führenden <span className="text-primary">Social-Media-Plattformen</span></>
+              <>Nahtlose <span className="text-primary">Daten-Integrationen</span></>
             ) : (
-              <>Expertise in Leading <span className="text-primary">Social Media Platforms</span></>
+              <>Seamless <span className="text-primary">Data Integrations</span></>
             )}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl">
             {isGe
-              ? "Unser Team beherrscht alle gängigen Social-Media-Plattformen und integriert nahtlos in Ihre bestehenden Tools."
-              : "Our team masters all popular social media platforms and integrates seamlessly with your existing tools."}
+              ? "Wir integrieren uns in Ihren Stack – Tabellen, CRMs, eCommerce, Datenbanken und Automatisierungstools – für reibungslose Übergaben."
+              : "We plug into your stack — spreadsheets, CRMs, eCommerce, databases, and automation tools — for smooth intake and delivery."}
           </p>
         </motion.div>
 
@@ -110,8 +111,8 @@ export const ToolsIntegration = () => {
             </p>
             <p className="text-sm sm:text-base text-muted-foreground">
               {isGe
-                ? "Wir integrieren uns mit allen gängigen Social-Media-Plattformen und Recruiting-Tools."
-                : "We integrate with all major social media platforms and recruiting tools."}
+                ? "Wir arbeiten mit allen gängigen Tabellen-, CRM-, eCommerce- und Automatisierungstools zusammen."
+                : "We work with all major spreadsheet, CRM, eCommerce, and automation tools."}
             </p>
           </motion.div>
         </div>

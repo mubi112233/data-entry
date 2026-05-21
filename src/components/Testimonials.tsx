@@ -1,13 +1,12 @@
 "use client";
 
-import { Star, Loader2 } from "lucide-react";
+import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { fetchTestimonials } from "@/lib/api";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { usePathname } from "next/navigation";
+import { dummyTestimonials } from "@/data/dummy";
 
 interface Testimonial {
   _id?: string;
@@ -19,77 +18,10 @@ interface Testimonial {
 }
 
 export const Testimonials = () => {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
-
   const copy = getCopy(currentLang, 'testimonials');
-
-  // Fetch testimonials from API
-  useEffect(() => {
-    const fetchTestimonialsData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await fetchTestimonials(currentLang);
-        if (!data) throw new Error('Failed to fetch testimonials');
-
-        const fetchedTestimonials = Array.isArray(data.testimonials)
-          ? [...data.testimonials].sort((a: any, b: any) => (a?.order ?? 0) - (b?.order ?? 0))
-          : [];
-        
-        setTestimonials(fetchedTestimonials);
-      } catch (err) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Error fetching testimonials:', err);
-        }
-        setError(err instanceof Error ? err.message : 'Failed to load testimonials');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonialsData();
-  }, [currentLang]);
-
-  // Loading state
-  if (loading) {
-    return (
-      <motion.section 
-        id="testimonials"
-        className={`relative ${SPACING.section} bg-background text-foreground z-40`}
-      >
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-4">
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-primary" />
-          </div>
-        </div>
-      </motion.section>
-    );
-  }
-
-  // Error state or no testimonials
-  if (error || testimonials.length === 0) {
-    return (
-      <motion.section 
-        id="testimonials"
-        className="relative py-8 sm:py-10 md:py-12 lg:py-14 bg-background text-foreground z-40"
-      >
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-4">
-          <div className="text-center py-20">
-            <p className="text-muted-foreground mb-4">
-              {error || (currentLang === 'ge' 
-                ? 'Keine Testimonials verfügbar. Bitte fügen Sie Testimonials im Admin-Panel hinzu.'
-                : 'No testimonials available. Please add testimonials in the admin panel.')}
-            </p>
-          </div>
-        </div>
-      </motion.section>
-    );
-  }
+  const testimonials: Testimonial[] = dummyTestimonials[currentLang as keyof typeof dummyTestimonials];
   return (
     <motion.section
       id="testimonials"
@@ -116,7 +48,9 @@ export const Testimonials = () => {
             {copy.heading?.replace(/<[^>]*>/g, '') || "Trusted by Growing Businesses"}
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            {copy.subheading || "See how professionals like you have transformed their productivity with our professional Social Recruitment services."}
+            {copy.subheading || (currentLang === 'ge'
+              ? "Echte Ergebnisse von Unternehmen, die mit uns für saubere, präzise Daten zusammengearbeitet haben."
+              : "Real results from real businesses who partnered with us for clean, accurate data.")}
           </p>
         </motion.div>
 

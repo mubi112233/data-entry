@@ -1,6 +1,6 @@
 /**
  * Next-safe copy/translation constants (no react-i18next runtime)
- * Mirrors frontend/src/lib/client-i18n.ts for badge/heading/subheading text.
+ * Data Entry focused content matching data-entry site structure.
  * Use URL-based language detection (en/ge) to select strings.
  */
 
@@ -19,80 +19,81 @@ export const copy = {
 
     // Hero Section
     hero: {
-      badge: "Social Media Marketing Agency",
-      title: "We Find Top Talent",
-      titleHighlight: "Through Social",
-      subtitle: "Transform your recruitment with data-driven social media strategies. We connect you with qualified candidates faster and more cost-effectively than traditional methods.",
-      ctaPrimary: "Book Free Consultation",
-      urgency: "Limited spots available this month",
+      badge: "Trusted by 500+ Businesses Worldwide",
+      title: "Fast, Accurate",
+      titleHighlight: "Data Entry Services",
+      subtitle: "Spreadsheet-style data entry with validation, clean-up, and QA. We handle forms, lists, catalogs, surveys, OCR docs, and bulk updates—accurately and on time.",
+      ctaPrimary: "Book Data Entry Consult (15 min)",
+      urgency: "Get Free Sample",
       stats: {
-        clients: "Placements Made",
-        costSaved: "Avg. Time to Hire",
-        rating: "Client Satisfaction",
+        clients: "Records Processed",
+        costSaved: "Avg Turnaround",
+        rating: "Accuracy (QA)",
       },
     },
 
     // How It Works
     howItWorks: {
-      badge: "Our Process",
-      heading: "From Strategy to <span class=\"text-gold\">Hire</span>",
-      description: "Our proven 4-step process delivers qualified candidates through targeted social media recruitment campaigns.",
+      badge: "Data Entry in 4 Steps",
+      heading: "How It Works",
+      description: "From scoping to delivery in 24–72 hours for most projects. Clear rules, consistent outputs, and measurable quality.",
       steps: {
         step1: {
           step: "Step 1",
-          title: "Strategy & Targeting",
-          description: "We analyze your hiring needs and build ideal candidate personas for precise social media targeting."
+          title: "Intake & Scoping",
+          description: "Share samples and rules. We confirm fields, validations, volumes, SLAs, and delivery format (Sheets, CSV, CRM)."
         },
         step2: {
           step: "Step 2",
-          title: "Campaign Creation",
-          description: "We craft compelling job ads and employer branding content optimized for each platform."
+          title: "Template & Sample",
+          description: "We build a spreadsheet-style template and deliver a free sample so you can review structure and quality."
         },
         step3: {
           step: "Step 3",
-          title: "Active Sourcing",
-          description: "Our team runs targeted campaigns across LinkedIn, Meta, TikTok, and professional networks."
+          title: "Data Entry & Validation",
+          description: "Our team enters data with keyboard-first shortcuts and automated checks to prevent duplicates and format issues."
         },
         step4: {
           step: "Step 4",
-          title: "Screening & Delivery",
-          description: "We pre-screen applicants and deliver a shortlist of qualified, interested candidates."
+          title: "QA & Delivery",
+          description: "Second-pass QA, issue fixes, and final delivery. Ongoing maintenance available for weekly or monthly updates."
         }
       }
     },
 
     // Services
     services: {
-      badge: "Our Services",
-      titlePrefix: "Recruitment",
-      titleHighlight: "Solutions",
-      subtitle: "End-to-end social media recruitment services designed to fill your open positions faster.",
+      badge: "Our Data Entry Services",
+      titlePrefix: "How We",
+      titleHighlight: "Power",
+      titleSuffix: "Your Data Ops",
+      subtitle: "End-to-end data entry operations—intake, cleaning, validation, and delivery—so your team can focus on growth, not spreadsheets.",
     },
 
-    // Why Choose Us (fallback, API may provide its own)
+    // Why Choose Us
     whyChooseUs: {
       badge: "Why Choose Us",
       heading: "What makes us <span class=\"text-gold\">different</span>",
-      description: "Data-driven recruitment with 60% faster time-to-hire and 40% lower cost-per-hire than traditional agencies.",
+      description: "Professional data entry, intelligent validation, and 99.9% accuracy guaranteed. 24–72h turnaround on most projects.",
     },
 
     // Testimonials
     testimonials: {
-      heading: "Trusted by <span class=\"text-gold\">200+ Companies</span>",
-      subheading: "See how we've helped businesses build their dream teams through social recruitment.",
+      heading: "Trusted by <span class=\"text-gold\">500+ Businesses</span>",
+      subheading: "Real results from real businesses who partnered with us for clean, accurate data.",
       caseStudy: {
         badge: "Success Story",
-        title: "Case Study: <span class=\"text-gold\">3.4x ROAS</span>",
-        description: "See how we helped a DTC beauty brand scale their team by 150% while reducing cost-per-hire by 32%.",
+        title: "Case Study: <span class=\"text-gold\">50k SKUs Normalized</span>",
+        description: "See how we helped an eCommerce brand normalize 50k product SKUs with 99.9% accuracy, eliminating order errors and returns.",
         cta: "View Full Case Study",
       },
     },
 
     // Blog
     blog: {
-      badge: "Recruitment Insights",
-      heading: "Latest <span class=\"text-gold\">HR Guides</span>",
-      description: "Expert recruitment strategies, social media hiring tips, employer branding best practices, and talent acquisition guides.",
+      badge: "Latest Insights",
+      heading: "Blog & <span class=\"text-gold\">Resources</span>",
+      description: "Guides and playbooks for fast, accurate, spreadsheet-style data operations—cleaning, OCR, QA, and migrations.",
       by: "By",
       readMore: "Read more",
       read: "Read",
@@ -101,11 +102,11 @@ export const copy = {
     // Case Studies
     caseStudies: {
       badge: "Success Stories",
-      heading: "Recruitment <span class=\"text-gold\">Success Stories</span>",
-      description: "See how we transformed hiring challenges into successful placements through strategic social media recruitment.",
+      heading: "Data Entry <span class=\"text-gold\">Success Stories</span>",
+      description: "See how teams shipped clean datasets faster—catalogs normalized, CRMs migrated, and surveys validated with high accuracy.",
       labels: {
-        saved: "Time Saved",
-        teamSize: "Hires Made",
+        saved: "Result",
+        teamSize: "Focus",
         timeline: "Timeframe",
         viewFull: "View Full Case Study",
         viewStudy: "View Case Study",
@@ -114,15 +115,15 @@ export const copy = {
 
     // FAQ
     faq: {
-      badge: "Recruitment FAQs",
+      badge: "Got Questions?",
       title: "Frequently Asked Questions",
-      description: "Answers to common questions about our social media recruitment services, platforms, pricing, and timelines.",
+      description: "Everything you need to know about our Data Entry services. Can't find what you're looking for? Chat with us.",
       qualityCardTitle: "Quality Guarantee",
-      qualityCardText: "Pre-screened candidates, skills assessments, culture fit evaluation, and replacement guarantee.",
-      toolsCardTitle: "Complete Recruitment Stack",
-      toolsCardText: "LinkedIn • Meta • TikTok • Instagram • Google Ads • Programmatic • ATS Integration",
+      qualityCardText: "Structured templates, validation rules, and second-pass QA. Double-entry verification for critical fields to reach 99.9%+.",
+      toolsCardTitle: "Complete Data Stack",
+      toolsCardText: "Google Sheets • Excel • Airtable • HubSpot • Salesforce • CSV/TSV • OCR • Zapier • Make",
       stillHaveQuestionsTitle: "Still have questions?",
-      stillHaveQuestionsText: "Our team is here to help. Get in touch and we'll respond within 24 hours.",
+      stillHaveQuestionsText: "Our team is here to help. Get in touch and we'll respond within 2 hours.",
       contactSupport: "Contact Support",
       viewPricing: "View Pricing",
     },
@@ -130,87 +131,89 @@ export const copy = {
     // Pricing
     pricing: {
       sectionBadge: "Transparent Pricing",
-      sectionTitle: "Recruitment Packages",
-      sectionDescription: "Choose a plan that fits your hiring volume. Professional recruitment with transparent pricing. No hidden fees.",
-      vaCountLabel: "How many hires per month?",
-      vaCountHelper: "Select your average monthly hiring volume",
+      sectionTitle: "Simple, Usage-Based Packages",
+      sectionDescription: "Choose a data entry package sized to your volume. Scale anytime. No hidden fees.",
+      vaCountLabel: "How many records per month?",
+      vaCountHelper: "Select your average monthly record volume",
       startingFrom: "Starting from €{price}/month",
       bulkDiscount: "{percent}% volume discount applied!",
       bulkSavings: "You save €{amount} total",
-      bulkHint: "Add {count} more hire{suffix} to unlock {percent}% discount",
-      bannerBadge: "Free 30‑Minute Strategy Call",
-      bannerTitle: "Get Expert Recruitment Advice",
-      bannerSubtitle: "Discuss your hiring challenges and get a custom social media recruitment strategy",
+      bulkHint: "Add {count} more record{suffix} to unlock {percent}% discount",
+      bannerBadge: "Free 15-Minute Data Entry Consult",
+      bannerTitle: "Get Expert Data Entry Advice",
+      bannerSubtitle: "Discuss your data challenges and get a custom data entry strategy with a free sample",
       bannerPoints: {
         noCommitment: "No obligation",
         cancelAnytime: "Cancel anytime",
-        fullAccess: "Free strategy audit"
+        fullAccess: "Free sample included"
       },
       plans: {
         starter: {
           name: "Starter",
-          hours: "Up to 3 hires/month",
+          hours: "Up to 1k records/mo",
           features: [
-            "LinkedIn & Meta campaigns",
-            "Basic candidate screening",
-            "Job ad creation & optimization",
-            "Weekly performance reports",
+            "Form & document processing",
+            "Basic data validation",
+            "Spreadsheet template setup",
+            "Weekly delivery",
             "Email support"
           ]
         },
         professional: {
-          name: "Professional",
-          hours: "Up to 10 hires/month",
+          name: "Growth",
+          hours: "Up to 10k records/mo",
           badge: "Most Popular",
           features: [
             "Everything in Starter",
-            "Multi-platform campaigns (TikTok, Instagram)",
-            "Advanced candidate assessments",
-            "Employer branding content",
-            "ATS integration",
+            "No setup fee",
+            "Data cleaning & normalization",
+            "Catalog & listing management",
+            "CRM/Sheet migration",
+            "Second-pass QA included",
             "Priority support"
           ]
         },
         enterprise: {
           name: "Enterprise",
-          hours: "Unlimited hires",
+          hours: "50k+ records & custom",
           badge: "Best Value",
           features: [
-            "Everything in Professional",
-            "Dedicated recruitment manager",
-            "Custom sourcing strategies",
-            "Video interviews & assessments",
-            "Employer branding workshop",
-            "24/7 support & SLAs"
+            "Everything in Growth",
+            "No setup fee",
+            "Dedicated data entry manager",
+            "Web research & data collection",
+            "Custom integrations & API",
+            "24/7 monitoring & support",
+            "Custom SLAs & compliance"
           ]
         }
       },
-      button: "Get Started",
-      perMonth: "/month",
-      hoursUnit: "hire volume",
+      button: "Get Free Sample",
+      perMonth: "/mo",
+      hoursUnit: "record volume",
       planSetupFee: "+€{fee} setup fee",
-      planNoSetupFee: "Free setup included",
-      disclaimer: "All plans billed monthly with no long-term contracts. Upgrade or downgrade anytime. First candidates within 7 days."
+      planNoSetupFee: "No setup fee",
+      disclaimer: "All plans billed monthly with no long-term contracts. Upgrade or downgrade anytime. Typical turnaround 24–72h depending on volume."
     },
 
     // Final CTA
     finalCTA: {
-      badge: "Start Hiring Smarter Today",
-      title: "Ready to Transform <span class=\"text-gold\">Your Recruitment?</span>",
-      description: "Join 200+ companies using social media to find top talent faster and more cost-effectively.",
+      badge: "Start Your Data Entry Today",
+      title: "Ready for Clean, <span class=\"text-gold\">Accurate Data?</span>",
+      description: "Get spreadsheet-style data delivered in 24–72 hours. Join 500+ teams shipping clean datasets with our proven data entry workflows.",
     },
 
-    // Value Proposition (if used)
+    // Value Proposition
     valueProposition: {
-      heading: "Why <span class=\"text-gold\">200+</span> Companies Trust Us",
-      description: "Data-driven recruitment with 60% faster time-to-hire and 40% lower cost-per-hire than traditional agencies.",
+      heading: "Why <span class=\"text-gold\">500+</span> Teams Trust Us",
+      description: "Professional data entry with 99.9% accuracy, 24–72h turnaround, and transparent delivery.",
     },
 
     // Tools Integration
     tools: {
-      badge: "Platforms We Use",
-      heading: "Integrated With <span class=\"text-gold\">Top Platforms</span>",
-      description: "We leverage the best social media and professional networks to reach your ideal candidates.",
+      badge: "Seamless Data Integrations",
+      heading: "Seamless <span class=\"text-gold\">Data Integrations</span>",
+      description: "We plug into your stack—spreadsheets, CRMs, eCommerce, databases, and automation tools—for smooth intake and delivery.",
     },
   },
 
@@ -220,7 +223,7 @@ export const copy = {
       services: "Leistungen",
       howItWorks: "So funktioniert's",
       pricing: "Preise",
-      testimonials: "Kundenstimmen",
+      testimonials: "Referenzen",
       faq: "FAQ",
       bookConsultation: "Termin vereinbaren",
       contact: "Kontakt",
@@ -228,80 +231,81 @@ export const copy = {
 
     // Hero Section
     hero: {
-      badge: "Social Media Marketing Agentur",
-      title: "Wir finden Top-Talente",
-      titleHighlight: "über Social Media",
-      subtitle: "Transformieren Sie Ihr Recruiting mit datengesteuerten Social-Media-Strategien. Wir verbinden Sie schneller und kostengünstiger mit qualifizierten Kandidaten als traditionelle Methoden.",
-      ctaPrimary: "Kostenlose Beratung",
-      urgency: "Begrenzte Plätze diesen Monat verfügbar",
+      badge: "Von über 500 Unternehmen weltweit vertraut",
+      title: "Schnelle, präzise",
+      titleHighlight: "Datenerfassungs-Services",
+      subtitle: "Tabellenähnliche Dateneingabe mit Validierung, Bereinigung und QS. Wir übernehmen Formulare, Listen, Kataloge, Umfragen, OCR-Dokumente und Massen-Updates—genau und termingerecht.",
+      ctaPrimary: "Datenerfassungs-Beratung buchen (15 Min)",
+      urgency: "Kostenlose Probe erhalten",
       stats: {
-        clients: "Vermittlungen",
-        costSaved: "Ø Time-to-Hire",
-        rating: "Kundenzufriedenheit",
+        clients: "Verarbeitete Datensätze",
+        costSaved: "Durchschn. Bearbeitungszeit",
+        rating: "Genauigkeit (QS)",
       },
     },
 
     // How It Works
     howItWorks: {
-      badge: "Unser Prozess",
-      heading: "Von Strategie zum <span class=\"text-gold\">Hire</span>",
-      description: "Unser bewährter 4-Schritte-Prozess liefert qualifizierte Kandidaten durch gezielte Social-Media-Recruiting-Kampagnen.",
+      badge: "Dateneingabe in 4 Schritten",
+      heading: "So funktioniert's",
+      description: "Von der Planung bis zur Lieferung in 24–72 Stunden bei den meisten Projekten. Klare Regeln, konsistente Ergebnisse und messbare Qualität.",
       steps: {
         step1: {
           step: "Schritt 1",
-          title: "Strategie & Targeting",
-          description: "Wir analysieren Ihre Hiring-Bedürfnisse und erstellen ideale Kandidaten-Personas für präzises Social-Media-Targeting."
+          title: "Intake & Abgrenzung",
+          description: "Sie teilen Beispiele und Regeln. Wir bestätigen Felder, Validierungen, Volumen, SLAs und das Lieferformat (Sheets, CSV, CRM)."
         },
         step2: {
           step: "Schritt 2",
-          title: "Kampagnen-Erstellung",
-          description: "Wir erstellen überzeugende Stellenanzeigen und Employer-Branding-Inhalte, optimiert für jede Plattform."
+          title: "Vorlage & Muster",
+          description: "Wir erstellen eine Tabellen-Vorlage und liefern ein kostenloses Muster, damit Sie Struktur und Qualität prüfen können."
         },
         step3: {
           step: "Schritt 3",
-          title: "Aktives Sourcing",
-          description: "Unser Team führt gezielte Kampagnen über LinkedIn, Meta, TikTok und professionelle Netzwerke durch."
+          title: "Dateneingabe & Validierung",
+          description: "Unser Team erfasst Daten mit Tastatur-Shortcuts und automatischen Prüfungen, um Duplikate und Formatfehler zu vermeiden."
         },
         step4: {
           step: "Schritt 4",
-          title: "Screening & Lieferung",
-          description: "Wir screenen Bewerber vor und liefern eine Shortlist qualifizierter, interessierter Kandidaten."
+          title: "QS & Lieferung",
+          description: "Zweitprüfung, Fehlerbehebung und finale Lieferung. Laufende Wartung für wöchentliche oder monatliche Updates verfügbar."
         }
       }
     },
 
     // Services
     services: {
-      badge: "Unsere Leistungen",
-      titlePrefix: "Recruiting",
-      titleHighlight: "Lösungen",
-      subtitle: "End-to-End Social-Media-Recruiting-Services, entwickelt um Ihre offenen Positionen schneller zu besetzen.",
+      badge: "Unsere Datenerfassungs-Leistungen",
+      titlePrefix: "So",
+      titleHighlight: "stärken",
+      titleSuffix: "wir Ihre Data Ops",
+      subtitle: "End-to-End-Datenerfassung—Intake, Bereinigung, Validierung und Lieferung—damit Ihr Team sich auf Wachstum statt Tabellen konzentrieren kann.",
     },
 
-    // Why Choose Us (fallback, API may provide its own)
+    // Why Choose Us
     whyChooseUs: {
       badge: "Warum wir",
       heading: "Was uns <span class=\"text-gold\">auszeichnet</span>",
-      description: "Datengesteuertes Recruiting mit 60% schnellerer Time-to-Hire und 40% niedrigeren Kosten pro Einstellung als traditionelle Agenturen.",
+      description: "Professionelle Dateneingabe, intelligente Validierung und 99,9 % Genauigkeit garantiert. 24–72h Lieferzeit bei den meisten Projekten.",
     },
 
     // Testimonials
     testimonials: {
-      heading: "Vertrauen von <span class=\"text-gold\">200+ Unternehmen</span>",
-      subheading: "Sehen Sie, wie wir Unternehmen geholfen haben, ihr Dreamteam durch Social Recruiting aufzubauen.",
+      heading: "Vertraut von <span class=\"text-gold\">500+ Unternehmen</span>",
+      subheading: "Echte Ergebnisse von Unternehmen, die mit uns für saubere, präzise Daten zusammengearbeitet haben.",
       caseStudy: {
         badge: "Erfolgsgeschichte",
-        title: "Fallstudie: <span class=\"text-gold\">3,4x ROAS</span>",
-        description: "Sehen Sie, wie wir einer DTC-Beauty-Marke halfen, ihr Team um 150% zu skalieren und gleichzeitig die Kosten pro Einstellung um 32% zu senken.",
+        title: "Fallstudie: <span class=\"text-gold\">50k SKUs normalisiert</span>",
+        description: "Sehen Sie, wie wir einer eCommerce-Marke halfen, 50k Produkt-SKUs mit 99,9 % Genauigkeit zu normalisieren und Bestellfehler zu eliminieren.",
         cta: "Vollständige Fallstudie ansehen",
       },
     },
 
     // Blog
     blog: {
-      badge: "Recruiting Insights",
-      heading: "Aktuelle <span class=\"text-gold\">HR Guides</span>",
-      description: "Experten-Recruiting-Strategien, Social-Media-Hiring-Tipps, Employer-Branding-Best-Practices und Talent-Acquisition-Guides.",
+      badge: "Aktuelle Einblicke",
+      heading: "Blog & <span class=\"text-gold\">Ressourcen</span>",
+      description: "Leitfäden und Playbooks für schnelle, präzise, tabellenartige Datenprozesse—Cleaning, OCR, QS und Migrationen.",
       by: "Von",
       readMore: "Weiterlesen",
       read: "Lesen",
@@ -310,11 +314,11 @@ export const copy = {
     // Case Studies
     caseStudies: {
       badge: "Erfolgsgeschichten",
-      heading: "Recruiting <span class=\"text-gold\">Erfolgsgeschichten</span>",
-      description: "Sehen Sie, wie wir Hiring-Herausforderungen in erfolgreiche Placements durch strategisches Social-Media-Recruiting verwandelt haben.",
+      heading: "Datenerfassungs-<span class=\"text-gold\">Erfolgsgeschichten</span>",
+      description: "So lieferten Teams schneller saubere Datensätze—Kataloge normalisiert, CRMs migriert, Umfragen mit hoher Genauigkeit validiert.",
       labels: {
-        saved: "Zeit gespart",
-        teamSize: "Einstellungen",
+        saved: "Ergebnis",
+        teamSize: "Fokus",
         timeline: "Zeitrahmen",
         viewFull: "Vollständige Fallstudie ansehen",
         viewStudy: "Fallstudie ansehen",
@@ -323,15 +327,15 @@ export const copy = {
 
     // FAQ
     faq: {
-      badge: "Recruiting FAQs",
+      badge: "Noch Fragen?",
       title: "Häufig gestellte Fragen",
-      description: "Antworten zu unseren Social-Media-Recruiting-Services, Plattformen, Preisen und Zeitplänen.",
+      description: "Alles, was Sie über unsere Datenerfassungs-Services wissen müssen. Nicht fündig geworden? Schreiben Sie uns.",
       qualityCardTitle: "Qualitätsgarantie",
-      qualityCardText: "Vor-screened Kandidaten, Skills-Assessments, Kultur-Fit-Evaluierung und Ersatzgarantie.",
-      toolsCardTitle: "Kompletter Recruiting-Stack",
-      toolsCardText: "LinkedIn • Meta • TikTok • Instagram • Google Ads • Programmatic • ATS-Integration",
+      qualityCardText: "Strukturierte Vorlagen, Validierungsregeln und Zweitprüfung. Doppel-Eingabe für kritische Felder, um 99,9 %+ zu erreichen.",
+      toolsCardTitle: "Kompletter Daten-Stack",
+      toolsCardText: "Google Sheets • Excel • Airtable • HubSpot • Salesforce • CSV/TSV • OCR • Zapier • Make",
       stillHaveQuestionsTitle: "Noch Fragen?",
-      stillHaveQuestionsText: "Unser Team hilft Ihnen gerne. Wir antworten innerhalb von 24 Stunden.",
+      stillHaveQuestionsText: "Unser Team hilft gerne. Kontaktieren Sie uns—wir antworten innerhalb von 2 Stunden.",
       contactSupport: "Support kontaktieren",
       viewPricing: "Preise ansehen",
     },
@@ -339,87 +343,89 @@ export const copy = {
     // Pricing
     pricing: {
       sectionBadge: "Transparente Preise",
-      sectionTitle: "Recruiting-Pakete",
-      sectionDescription: "Wählen Sie einen Plan, der zu Ihrem Hiring-Volumen passt. Professionelles Recruiting mit transparenten Preisen.",
-      vaCountLabel: "Wie viele Einstellungen pro Monat?",
-      vaCountHelper: "Wählen Sie Ihr durchschnittliches monatliches Hiring-Volumen",
+      sectionTitle: "Einfache, nutzungsbasierte Pakete",
+      sectionDescription: "Wählen Sie ein Paket passend zu Ihrem Volumen. Jederzeit skalieren. Keine versteckten Gebühren.",
+      vaCountLabel: "Wie viele Datensätze pro Monat?",
+      vaCountHelper: "Wählen Sie Ihr durchschnittliches monatliches Datensatz-Volumen",
       startingFrom: "Ab €{price}/Monat",
       bulkDiscount: "{percent}% Volumenrabatt!",
       bulkSavings: "Gesamtersparnis: €{amount}",
-      bulkHint: "Fügen Sie {count} weitere Einstellung{suffix} hinzu, um {percent}% Rabatt zu erhalten",
-      bannerBadge: "Kostenlose 30-Min Strategie-Session",
-      bannerTitle: "Erhalten Sie Experten-Recruiting-Beratung",
-      bannerSubtitle: "Besprechen Sie Ihre Hiring-Herausforderungen und erhalten Sie eine Social-Media-Recruiting-Strategie",
+      bulkHint: "Fügen Sie {count} weiteren Datensatz{suffix} hinzu, um {percent}% Rabatt zu erhalten",
+      bannerBadge: "Kostenlose 15-Min Datenerfassungs-Beratung",
+      bannerTitle: "Erhalten Sie Experten-Datenerfassungs-Beratung",
+      bannerSubtitle: "Besprechen Sie Ihre Daten-Herausforderungen und erhalten Sie eine individuelle Strategie mit kostenloser Probe",
       bannerPoints: {
         noCommitment: "Keine Verpflichtung",
         cancelAnytime: "Jederzeit kündbar",
-        fullAccess: "Kostenloser Strategie-Audit"
+        fullAccess: "Kostenlose Probe inklusive"
       },
       plans: {
         starter: {
           name: "Starter",
-          hours: "Bis zu 3 Einstellungen/Monat",
+          hours: "Bis zu 1k Datensätze/Monat",
           features: [
-            "LinkedIn & Meta Kampagnen",
-            "Basis-Kandidaten-Screening",
-            "Stellenanzeigen-Erstellung & Optimierung",
-            "Wöchentliche Performance-Berichte",
-            "E-Mail & Chat Support"
+            "Formular- & Dokumentenverarbeitung",
+            "Basis-Datenvalidierung",
+            "Tabellen-Vorlage Setup",
+            "Wöchentliche Lieferung",
+            "E-Mail-Support"
           ]
         },
         professional: {
-          name: "Professional",
-          hours: "Bis zu 10 Einstellungen/Monat",
-          badge: "Beliebteste Wahl",
+          name: "Growth",
+          hours: "Bis zu 10k Datensätze/Monat",
+          badge: "Am beliebtesten",
           features: [
             "Alles aus Starter",
-            "Multi-Plattform-Kampagnen (TikTok, Instagram)",
-            "Erweiterte Kandidaten-Assessments",
-            "Employer-Branding-Inhalte",
-            "ATS-Integration",
+            "Keine Einrichtungsgebühr",
+            "Datenbereinigung & Normalisierung",
+            "Katalog- & Listenmanagement",
+            "CRM/Sheet-Migration",
+            "Zweitprüfung inklusive",
             "Prioritätsupport"
           ]
         },
         enterprise: {
           name: "Enterprise",
-          hours: "Unbegrenzte Einstellungen",
-          badge: "Bester Wert",
+          hours: "50k+ Datensätze & individuell",
+          badge: "Bestes Preis-Leistungs-Verhältnis",
           features: [
-            "Alles aus Professional",
-            "Dedizierter Recruiting-Manager",
-            "Individuelle Sourcing-Strategien",
-            "Video-Interviews & Assessments",
-            "Employer-Branding-Workshop",
-            "24/7 Support & SLAs"
+            "Alles aus Growth",
+            "Keine Einrichtungsgebühr",
+            "Dedizierter Datenerfassungs-Manager",
+            "Web-Recherche & Datensammlung",
+            "Individuelle Integrationen & API",
+            "24/7 Monitoring & Support",
+            "Individuelle SLAs & Compliance"
           ]
         }
       },
-      button: "Jetzt starten",
+      button: "Kostenlose Probe erhalten",
       perMonth: "/Monat",
-      hoursUnit: "Einstellungs-Volumen",
-      planSetupFee: "+€{fee} Setup-Gebühr",
-      planNoSetupFee: "Kostenloses Setup inklusive",
-      disclaimer: "Alle Pläne monatlich abrechnbar ohne Langzeitvertrag. Jederzeit upgraden oder downgraden. Erste Kandidaten innerhalb von 7 Tagen."
+      hoursUnit: "Datensatz-Volumen",
+      planSetupFee: "+€{fee} Einrichtungsgebühr",
+      planNoSetupFee: "Keine Einrichtungsgebühr",
+      disclaimer: "Alle Pläne monatlich ohne Langzeitvertrag. Upgrade/Downgrade jederzeit. Typische Bearbeitungszeit 24–72h je nach Volumen."
     },
 
     // Final CTA
     finalCTA: {
-      badge: "Beginnen Sie heute mit smarter Hiring",
-      title: "Bereit, Ihr <span class=\"text-gold\">Recruiting zu transformieren?</span>",
-      description: "Schließen Sie sich 200+ Unternehmen an, die Social Media nutzen, um schneller und kostengünstiger Top-Talente zu finden.",
+      badge: "Starten Sie heute mit der Datenerfassung",
+      title: "Bereit für saubere, <span class=\"text-gold\">präzise Daten?</span>",
+      description: "Erhalten Sie tabellenartige Daten in 24–72 Stunden. Schließen Sie sich 500+ Teams an, die mit unseren bewährten Workflows saubere Datensätze liefern.",
     },
 
-    // Value Proposition (if used)
+    // Value Proposition
     valueProposition: {
-      heading: "Warum <span class=\"text-gold\">200+</span> Unternehmen uns vertrauen",
-      description: "Datengesteuertes Recruiting mit 60% schnellerer Time-to-Hire und 40% niedrigeren Kosten pro Einstellung als traditionelle Agenturen.",
+      heading: "Warum <span class=\"text-gold\">500+</span> Teams uns vertrauen",
+      description: "Professionelle Dateneingabe mit 99,9 % Genauigkeit, 24–72h Lieferzeit und transparenter Abwicklung.",
     },
 
     // Tools Integration
     tools: {
-      badge: "Plattformen die wir nutzen",
-      heading: "Integriert mit <span class=\"text-gold\">Top-Plattformen</span>",
-      description: "Wir nutzen die besten Social-Media- und professionellen Netzwerke, um Ihre idealen Kandidaten zu erreichen.",
+      badge: "Nahtlose Daten-Integrationen",
+      heading: "Nahtlose <span class=\"text-gold\">Daten-Integrationen</span>",
+      description: "Wir integrieren uns in Ihren Stack—Tabellen, CRMs, eCommerce, Datenbanken und Automatisierung—für reibungslose Übergaben.",
     },
   },
 } as const;
@@ -431,5 +437,3 @@ export const getCopy = <K extends keyof typeof copy.en>(lang: string, key: K) =>
   const normalizedLang = lang.toLowerCase().startsWith('ge') || lang.toLowerCase().startsWith('de') ? 'ge' : 'en';
   return copy[normalizedLang as 'en' | 'ge'][key];
 };
-
-

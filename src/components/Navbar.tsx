@@ -116,13 +116,18 @@ export const Navbar = () => {
             onClick={() => router.push(`/${localeUrlPrefix(siteLocale)}`)}
             className="flex items-center space-x-2 sm:space-x-3 hover:bg-white/10 rounded-lg px-2 py-1 transition-all duration-300"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-gradient-to-br from-[hsl(217,91%,65%)] to-[hsl(220,90%,60%)] rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110">
-              <span className="text-white font-bold text-base sm:text-lg md:text-lg lg:text-xl">
-                {siteConfig.brandMarkText}
-              </span>
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="3" rx="1" fill="white" />
+                <rect x="3" y="8" width="11" height="2" rx="1" fill="white" opacity="0.8" />
+                <rect x="3" y="12" width="14" height="2" rx="1" fill="white" opacity="0.8" />
+                <rect x="3" y="16" width="9" height="2" rx="1" fill="white" opacity="0.8" />
+                <circle cx="19" cy="18" r="3" fill="#4ade80" />
+                <path d="M17.5 18l1 1 2-2" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
-            <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[hsl(217,91%,60%)] to-[hsl(330,81%,60%)] bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-300 whitespace-nowrap">
-              {siteConfig.brandName}
+            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-green-800 dark:text-foreground hover:text-green-600 dark:hover:text-gold transition-colors duration-300 whitespace-nowrap">
+              DataEntry <span className="text-green-600 dark:text-green-400">Pro</span>
             </span>
           </button>
 
@@ -132,10 +137,10 @@ export const Navbar = () => {
                 type="button"
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className="relative text-foreground/90 hover:text-foreground transition-colors duration-300 font-medium text-sm lg:text-base px-2 lg:px-3 py-2 rounded-lg hover:bg-accent group whitespace-nowrap"
+                className="relative text-green-800 dark:text-foreground hover:text-green-600 dark:hover:text-gold transition-all duration-300 font-medium text-sm lg:text-base px-2 lg:px-3 py-2 rounded-lg hover:bg-green-100 dark:hover:bg-gold/10 group whitespace-nowrap"
               >
                 {item.name}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[hsl(217,91%,60%)] to-[hsl(330,81%,60%)] group-hover:w-4/5 transition-all duration-300" />
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-green-600 dark:bg-gold group-hover:w-4/5 transition-all duration-300" />
               </button>
             ))}
           </div>
@@ -163,14 +168,14 @@ export const Navbar = () => {
 
             <Link
               href={localizedPath(siteLocale, siteConfig.routes.contact)}
-              className="text-sm px-3 lg:px-4 py-2 border border-[hsl(217,91%,60%)]/50 rounded-full hover:bg-[hsl(217,91%,60%)]/10 hover:border-[hsl(217,91%,60%)] transition-all duration-300 font-semibold whitespace-nowrap text-foreground"
+              className="text-sm px-3 lg:px-4 py-2 border border-green-600/50 rounded-full hover:bg-green-600/10 hover:border-green-600 dark:border-gold/50 dark:hover:bg-gold/10 dark:hover:border-gold transition-all duration-300 font-semibold whitespace-nowrap text-foreground"
             >
               {currentLang === "de" ? "Kontakt" : "Contact"}
             </Link>
 
             <Link
               href={localizedPath(siteLocale, siteConfig.routes.bookMeeting)}
-              className="text-sm px-3 lg:px-4 py-2 bg-gradient-to-r from-[hsl(217,91%,60%)] to-[hsl(330,81%,60%)] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-lg shadow-[hsl(217,91%,60%)]/30 font-semibold whitespace-nowrap"
+              className="text-sm px-3 lg:px-4 py-2 bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white rounded-full hover:from-green-500 hover:to-green-700 transition-all duration-300 shadow-lg shadow-green-600/30 font-semibold whitespace-nowrap"
             >
               {currentLang === "de" ? "Starten" : "Get Started"}
             </Link>
@@ -237,7 +242,7 @@ export const Navbar = () => {
                         router.push(currentLang === "de" ? "/de/contact" : "/en/contact");
                         setIsOpen(false);
                       }}
-                      className="w-full text-center text-base py-3 border border-[hsl(221,54%,53%)]/50 text-foreground rounded-lg font-semibold hover:bg-[hsl(221,54%,53%)]/10 hover:border-[hsl(221,54%,53%)] transition-all duration-300"
+                      className="w-full text-center text-base py-3 border border-green-600/50 text-foreground rounded-lg font-semibold hover:bg-green-600/10 hover:border-green-600 transition-all duration-300"
                     >
                       {currentLang === "de" ? "Kontakt" : "Contact"}
                     </button>
@@ -247,7 +252,7 @@ export const Navbar = () => {
                         router.push(currentLang === "de" ? "/de/book-meeting" : "/en/book-meeting");
                         setIsOpen(false);
                       }}
-                      className="w-full text-center text-base py-3 bg-[hsl(221,54%,53%)] text-[hsl(0,0%,100%)] rounded-lg font-semibold hover:bg-[hsl(221,54%,45%)] hover:shadow-lg hover:shadow-[hsl(221,54%,53%)]/30 transition-all duration-300"
+                      className="w-full text-center text-base py-3 bg-gradient-to-br from-green-600 to-green-800 text-white rounded-lg font-semibold hover:from-green-500 hover:to-green-700 hover:shadow-lg hover:shadow-green-600/30 transition-all duration-300"
                     >
                       {currentLang === "de" ? "Jetzt starten" : "Get Started"}
                     </button>

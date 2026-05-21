@@ -3,9 +3,10 @@ import { Navbar } from "@/components/Navbar";
 import { HomeBelowFold } from "@/components/HomeBelowFold.hybrid";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { fetchApiData, API_ENDPOINTS, normalizeLanguage, fetchFAQ } from "@/lib/api";
+import { fetchApiData, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { generateFAQSchema, generateBreadcrumbSchema } from "@/lib/structured-data";
 import { SITE_URL, absoluteUrl, hreflangAlternates, publicLocalePathSegment } from "@/lib/site-url";
+import { dummyFAQ } from "@/data/dummy";
 
 export const revalidate = 3600;
 
@@ -53,46 +54,48 @@ export async function generateMetadata({
   const title =
     hero?.metaTitle ||
     (lang === "ge"
-      ? "SocialRecruit – Social-Media-Recruiting Agentur | Top-Talente über LinkedIn, Instagram & TikTok finden"
-      : "SocialRecruit – Social Media Recruitment Agency | Hire Top Talent via LinkedIn, Instagram & TikTok");
+      ? "DataEntry Pro – Professionelle Datenerfassung | Schnell, präzise & skalierbar"
+      : "DataEntry Pro – Professional Data Entry Services | Fast, Accurate & Scalable");
   const description =
     hero?.metaDescription ||
     (lang === "ge"
-      ? "SocialRecruit ist Ihre Spezialagentur für Social-Media-Recruiting. Wir finden qualifizierte Kandidaten über LinkedIn, Instagram & TikTok – 80% schneller und 60% kosteneffizienter. Jetzt kostenlose Strategieberatung buchen."
-      : "SocialRecruit is your specialist social media recruitment agency. We source qualified candidates through LinkedIn, Instagram & TikTok – 80% faster and 60% more cost-effective. Book your free strategy call today.");
+      ? "DataEntry Pro bietet professionelle Datenerfassungs-Services mit 99,9 % Genauigkeit. Formulare, Kataloge, CRM-Migrationen und mehr – Lieferung in 24–72 Stunden. Jetzt kostenlose Probe anfordern."
+      : "DataEntry Pro delivers professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, and more – delivered in 24–72 hours. Get your free sample today.");
   const keywordsFromHero = hero?.metaKeywords
-    ? hero.metaKeywords.split(",").map((k: string) => k.trim())
+    ? (Array.isArray(hero.metaKeywords)
+        ? hero.metaKeywords.map((k: string) => k.trim())
+        : String(hero.metaKeywords).split(",").map((k: string) => k.trim()))
     : null;
   const defaultDeKeywords = [
-    "Social-Media-Recruiting",
-    "Social Media Rekrutierung",
-    "Talentgewinnung",
-    "Personalvermittlung",
-    "Kandidatensourcing",
-    "LinkedIn Recruiting",
-    "Instagram Recruiting",
-    "TikTok Recruiting",
-    "Recruiting-Agentur",
-    "Digital Recruiting",
-    "Employer Branding",
-    "Active Sourcing",
-    "Talent Acquisition",
+    "Datenerfassung",
+    "Dateneingabe Service",
+    "Datenbereinigung",
+    "Datenmigration",
+    "OCR Datenerfassung",
+    "CRM Dateneingabe",
+    "Katalog Datenerfassung",
+    "Formularverarbeitung",
+    "Datenvalidierung",
+    "Outsourcing Datenerfassung",
+    "Google Sheets Dateneingabe",
+    "Excel Datenerfassung",
+    "Dateneingabe Agentur",
   ];
   const defaultEnKeywords = [
-    "Social Media Recruitment",
-    "Social Recruiting",
-    "Talent Sourcing",
-    "Recruitment Agency",
-    "Candidate Sourcing",
-    "LinkedIn Recruiting",
-    "Instagram Recruiting",
-    "TikTok Recruiting",
-    "Digital Recruitment",
-    "Employer Branding",
-    "Active Sourcing",
-    "Talent Acquisition",
-    "Recruitment Outsourcing",
-    "Hiring Solutions",
+    "Data Entry Services",
+    "Data Entry Outsourcing",
+    "Data Cleaning",
+    "Data Migration",
+    "OCR Data Entry",
+    "CRM Data Entry",
+    "Catalog Data Entry",
+    "Form Processing",
+    "Data Validation",
+    "Spreadsheet Data Entry",
+    "Google Sheets Data Entry",
+    "Excel Data Entry",
+    "Data Entry Agency",
+    "Bulk Data Entry",
   ];
   const keywords = keywordsFromHero ?? (lang === "ge" ? defaultDeKeywords : defaultEnKeywords);
   const pathSeg = publicLocalePathSegment(lang);
@@ -112,7 +115,7 @@ export async function generateMetadata({
       description,
       url: canonical,
       type: "website",
-      siteName: "SocialRecruit",
+      siteName: "DataEntry Pro",
       locale: lang === "ge" ? "de_DE" : "en_US",
       alternateLocale: lang === "ge" ? "en_US" : "de_DE",
       images: [
@@ -120,7 +123,7 @@ export async function generateMetadata({
           url: "/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: lang === "ge" ? "SocialRecruit — Social-Media-Recruiting-Agentur" : "SocialRecruit — Professional Social Recruitment",
+          alt: lang === "ge" ? "DataEntry Pro — Professionelle Datenerfassungs-Agentur" : "DataEntry Pro — Professional Data Entry Services",
         },
       ],
     },
@@ -146,10 +149,10 @@ const pageJsonLd = (baseUrl: string) => ({
   en: {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "SocialRecruit — Professional Social Recruitment",
-    provider: { "@type": "Organization", name: "SocialRecruit" },
+    name: "DataEntry Pro — Professional Data Entry Services",
+    provider: { "@type": "Organization", name: "DataEntry Pro" },
     description:
-      "Professional Social Media Recruitment services. Find top talent through LinkedIn, Instagram & TikTok. 80% faster hiring with expert candidate sourcing.",
+      "Professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, OCR processing, and bulk data entry – delivered in 24–72 hours.",
     areaServed: [
       { "@type": "Country", name: "Germany" },
       { "@type": "Country", name: "Austria" },
@@ -163,10 +166,10 @@ const pageJsonLd = (baseUrl: string) => ({
   ge: {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "SocialRecruit — Professionelles Social-Media-Recruiting",
-    provider: { "@type": "Organization", name: "SocialRecruit" },
+    name: "DataEntry Pro — Professionelle Datenerfassungs-Services",
+    provider: { "@type": "Organization", name: "DataEntry Pro" },
     description:
-      "Professionelle Social-Media-Recruiting-Dienstleistungen. Finden Sie Top-Talente über LinkedIn, Instagram & TikTok. 80% schneller einstellen mit Experten-Sourcing.",
+      "Professionelle Datenerfassungs-Services mit 99,9 % Genauigkeit. Formulare, Kataloge, CRM-Migrationen, OCR-Verarbeitung und Massen-Dateneingabe – Lieferung in 24–72 Stunden.",
     areaServed: [
       { "@type": "Country", name: "Germany" },
       { "@type": "Country", name: "Austria" },
@@ -194,9 +197,8 @@ export default async function HomeLangPage({
   const lang = rawLang === 'de' || rawLang === 'ge' ? 'ge' : 'en';
   const jsonLd = pageJsonLd(SITE_URL)[lang];
 
-  // Fetch FAQ data for structured data
-  const faqData = await fetchFAQ(lang);
-  const faqs = faqData?.faqs?.slice(0, 10) || []; // Limit to 10 FAQs for schema
+  // FAQ data from dummy
+  const faqs = dummyFAQ[lang === 'ge' ? 'ge' : 'en'].slice(0, 10);
 
   // Generate FAQ schema
   const faqSchema = faqs.length > 0

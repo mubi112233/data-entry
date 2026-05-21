@@ -144,7 +144,7 @@ export const colorSchemes: Record<string, ColorScheme> = {
 };
 
 // Current active theme - CHANGE THIS TO SWITCH THEMES
-export const currentTheme = "blue"; // Options: "blue", "gold", "purple", "green"
+export const currentTheme = "green"; // Options: "blue", "gold", "purple", "green"
 
 // Get current theme colors
 export const theme = colorSchemes[currentTheme].colors;

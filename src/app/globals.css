@@ -14,128 +14,124 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light Mode - Blueish & Pinkish Theme */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Light Mode: White background with dark text */
+    --background: 0 0% 100%; /* Pure white background */
+    --foreground: 0 0% 9%; /* Dark text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 0 0% 9%; /* Dark text on cards */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 0 0% 9%;
 
-    --primary: 217 91% 60%; /* Professional blue */
+    --primary: 142 71% 35%; /* Green primary */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 330 81% 60%; /* Vibrant pink */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 330 81% 90%; /* Light pink accent */
-    --accent-foreground: 222 47% 11%;
+    --accent: 142 71% 35%; /* Green accent */
+    --accent-foreground: 0 0% 100%;
+
+    --hover: 0 0% 96%;
+    --hover-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 142 71% 35%;
 
     --radius: 0.5rem;
 
-    /* Custom tokens for blueish & pinkish theme */
-    --gold: 217 91% 60%; /* Blue as primary */
-    --gold-dark: 221 83% 53%; /* Darker blue */
-    --gold-light: 217 92% 75%; /* Lighter blue */
-    --brand-blue: 330 81% 60%; /* Pink as secondary */
-
-    /* Simple Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(330 81% 60%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(222, 47%, 15%) 100%);
-    --gradient-light: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
-
-    /* Simple Shadows */
-    --shadow-gold: 0 10px 40px -10px hsl(217 91% 60% / 0.25);
-    --shadow-gold-lg: 0 25px 80px -20px hsl(217 91% 60% / 0.35);
-    --shadow-elegant: 0 20px 60px -15px hsl(215 25% 21% / 0.3);
-    --shadow-brutal: 8px 8px 0px hsl(217 91% 60%);
-
-    /* Transitions - Ultra smooth */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Custom tokens tuned to green */
+    --gold: 142 71% 35%;      /* Green highlight */
+    --gold-dark: 142 72% 28%; /* Darker green */
+    --gold-light: 142 54% 50%; /* Lighter green */
+    --brand-blue: 142 85% 20%; /* Dark green used by brand token */
+    
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(142 71% 40%) 0%, hsl(142 85% 20%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(142 30% 12%) 0%, hsl(142 30% 16%) 100%);
+    
+    /* Shadows */
+    --shadow-gold: 0 10px 40px -10px hsl(142 71% 40% / 0.3);
+    --shadow-gold-lg: 0 25px 80px -20px hsl(142 71% 40% / 0.4);
+    --shadow-elegant: 0 20px 60px -15px hsl(142 30% 20% / 0.3);
+    --shadow-brutal: 8px 8px 0px hsl(142 71% 40%);
+    
+    /* Transitions */
+    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --transition-modern: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-butter: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    --transition-premium: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-foreground: 0 0% 9%;
+    --sidebar-primary: 142 71% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 330 81% 90%;
-    --sidebar-accent-foreground: 222 47% 11%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 9%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 142 71% 35%;
 
     /* Typographic + layout tokens */
-    --heading-color: 222 47% 12%;
+    --heading-color: 0 0% 9%; /* Dark headings */
     --heading-size: 1.5rem;
     --side-padding: 1.5rem;
   }
 
   .dark {
-    /* Dark Mode - Blueish & Pinkish Theme */
-    --background: 330 15% 12%;
-    --foreground: 0 0% 98%;
+    /* Dark Mode: Brighter green background */
+    --background: 152 55% 22%; /* Brighter green background (was 152 50% 15%) */
+    --foreground: 0 0% 100%; /* Pure white text */
 
-    --card: 330 15% 14%;
-    --card-foreground: 0 0% 98%;
+    --card: 152 45% 18%; /* Lighter green surface */
+    --card-foreground: 0 0% 100%; /* White text */
 
-    --popover: 330 15% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 152 45% 18%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 217 91% 60%; /* Blue primary */
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 100%; /* White primary */
+    --primary-foreground: 152 50% 15%; /* Green text on white */
 
-    --secondary: 330 81% 60%; /* Pink secondary */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 152 40% 20%; /* Green surface */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 330 12% 25%;
-    --muted-foreground: 330 10% 75%;
+    --muted: 152 35% 25%; /* Muted green */
+    --muted-foreground: 0 0% 90%;
 
-    --accent: 330 81% 60%; /* Pink accent */
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 152 50% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --hover: 152 45% 22%; /* Hover green */
+    --hover-foreground: 0 0% 100%;
 
-    --border: 330 15% 25%;
-    --input: 330 15% 25%;
-    --ring: 217 91% 60%;
+    --destructive: 355 75% 54%;
+    --destructive-foreground: 0 0% 100%;
 
-    /* Simple Dark Gradients */
-    --gradient-dark: linear-gradient(180deg, hsl(330, 15%, 12%) 0%, hsl(330, 15%, 15%) 100%);
+    --border: 152 30% 30%; /* Green borders */
+    --input: 152 30% 30%;
+    --ring: 0 0% 100%;
+    
+    --sidebar-background: 152 50% 15%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 152 50% 15%;
+    --sidebar-accent: 152 45% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 152 30% 30%;
+    --sidebar-ring: 0 0% 100%;
 
-    /* Simple Shadows for Dark Mode */
-    --shadow-elegant: 0 20px 60px -15px hsl(330 15% 25% / 0.4);
+    --heading-color: 0 0% 100%; /* White headings */
+    --brand-blue: 0 0% 100%; /* White brand token */
+    --gold: 0 0% 100%; /* White accent highlight */
 
-    --sidebar-background: 330 15% 12%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 330 81% 60%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 330 15% 25%;
-    --sidebar-ring: 217 91% 60%;
-
-    --heading-color: 0 0% 98%;
-    --brand-blue: 330 81% 60%; /* Pink as brand accent */
-    --gold: 217 91% 60%; /* Blue as primary */
-
-    /* Dark gradient */
-    --gradient-dark: linear-gradient(180deg, hsl(330, 15%, 12%) 0%, hsl(330, 15%, 15%) 100%);
+    /* Dark gradient with green tones */
+    --gradient-dark: linear-gradient(180deg, hsl(152 50% 12%) 0%, hsl(152 50% 18%) 100%);
   }
 }
 
@@ -152,7 +148,6 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     transition: background-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
@@ -160,18 +155,6 @@ All colors MUST be HSL.
   h1, h2, h3, h4, h5, h6 {
     color: hsl(var(--heading-color));
     transition: color 0.3s ease;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-  }
-
-  h1 {
-    letter-spacing: -0.03em;
-    font-weight: 800;
-  }
-
-  h2 {
-    letter-spacing: -0.025em;
-    font-weight: 700;
   }
 
   p {
@@ -185,11 +168,11 @@ All colors MUST be HSL.
 
   /* Simple Background Styling */
   .dark {
-    background: hsl(330, 15%, 12%);
+    background: hsl(152, 50%, 15%);
   }
 
   .dark body {
-    background: hsl(330, 15%, 12%);
+    background: hsl(152, 50%, 15%);
   }
 
   /* Professional button styles */

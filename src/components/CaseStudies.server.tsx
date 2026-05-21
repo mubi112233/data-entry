@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { localizedPath, siteConfig, localeUrlPrefix, type SiteLocale } from "@/lib/site-config";
-import { fetchCaseStudiesCardsData } from "@/lib/data-fetching";
+import { dummyCaseStudies } from "@/data/dummy";
 
 const slugify = (title: string | undefined | null) => {
   if (!title) return "untitled";
@@ -17,7 +17,7 @@ const slugify = (title: string | undefined | null) => {
 };
 
 export async function CaseStudies({ lang }: { lang: string }) {
-  const studies = await fetchCaseStudiesCardsData(lang);
+  const studies = dummyCaseStudies[lang === 'ge' ? 'ge' : 'en'];
   const copy = getCopy(lang, "caseStudies");
   const urlSeg = localeUrlPrefix((lang === "ge" ? "ge" : "en") as SiteLocale);
 

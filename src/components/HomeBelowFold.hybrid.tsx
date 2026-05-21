@@ -8,11 +8,10 @@ import { Blog } from "@/components/Blog";
 import { FAQInteractive } from "@/components/FAQInteractive.client";
 import { FinalCTA } from "@/components/FinalCTA.server";
 import { SPACING } from "@/lib/constants";
-import { fetchFAQ } from "@/lib/api";
+import { dummyFAQ } from "@/data/dummy";
 
 export async function HomeBelowFold({ lang }: { lang: string }) {
-  const faqs = await fetchFAQ(lang);
-  const faqData = faqs?.faqs || [];
+  const faqData = dummyFAQ[lang === 'ge' ? 'ge' : 'en'];
 
   return (
     <>

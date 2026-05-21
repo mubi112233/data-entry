@@ -22,28 +22,28 @@ export default function OgImage() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px" }}>
-          <div style={{ width: 56, height: 56, background: "#3e65cf", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#fff", fontWeight: 900, fontSize: 28 }}>E</span>
+          <div style={{ width: 56, height: 56, background: "#16a34a", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ color: "#fff", fontWeight: 900, fontSize: 28 }}>D</span>
           </div>
-          <span style={{ color: "#fff", fontWeight: 800, fontSize: 32 }}>SocialRecruit</span>
+          <span style={{ color: "#fff", fontWeight: 800, fontSize: 32 }}>DataEntry Pro</span>
         </div>
 
         {/* Headline */}
         <h1 style={{ color: "#fff", fontSize: 64, fontWeight: 800, lineHeight: 1.1, margin: "0 0 24px 0", maxWidth: 800 }}>
           Professional{" "}
-          <span style={{ color: "#3e65cf" }}>Social Recruitment</span>
+          <span style={{ color: "#16a34a" }}>Data Entry Services</span>
         </h1>
 
         {/* Subtitle */}
         <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 28, margin: "0 0 48px 0", maxWidth: 700 }}>
-          Hire Top Talent via LinkedIn, Instagram & TikTok. 80% Faster. 60% Cost-Effective.
+          Forms, Catalogs, CRM Migrations & OCR Processing. 99.9% Accuracy. 24–72h Delivery.
         </p>
 
         {/* Stats */}
         <div style={{ display: "flex", gap: "40px" }}>
-          {[["500+", "Companies Served"], ["98%", "Satisfaction"], ["80%", "Time Savings"]].map(([val, label]) => (
+          {[["5M+", "Records Processed"], ["99.9%", "Accuracy (QA)"], ["24–72h", "Avg Turnaround"]].map(([val, label]) => (
             <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <span style={{ color: "#3e65cf", fontSize: 36, fontWeight: 800 }}>{val}</span>
+              <span style={{ color: "#16a34a", fontSize: 36, fontWeight: 800 }}>{val}</span>
               <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 18 }}>{label}</span>
             </div>
           ))}
