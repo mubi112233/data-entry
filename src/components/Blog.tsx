@@ -64,7 +64,7 @@ export const Blog = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {posts.map((post, index: number) => (
             <motion.div
-              key={`${post.blogId || post.id || 'post'}-${index}`}
+              key={`${post.blogId || 'post'}-${index}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
