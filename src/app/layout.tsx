@@ -10,48 +10,43 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e1a33" },
+    { media: "(prefers-color-scheme: light)", color: "#16a34a" },
+    { media: "(prefers-color-scheme: dark)", color: "#14532d" },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "SocialRecruit – Social Media Recruitment Agency | Hire Top Talent via LinkedIn, Instagram & TikTok",
-    template: "%s | SocialRecruit",
+    default: "DataEntry Pro – Professional Data Entry Services | Fast, Accurate & Scalable",
+    template: "%s | DataEntry Pro",
   },
   description:
-    "SocialRecruit is your specialist social media recruitment agency. We source qualified candidates through LinkedIn, Instagram & TikTok – 80% faster and 60% more cost-effective than traditional methods. Book your free strategy call today.",
+    "DataEntry Pro delivers professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, OCR processing, and bulk data entry – delivered in 24–72 hours. Get your free sample today.",
   keywords: [
-    "social media recruitment",
-    "social recruiting",
-    "linkedin recruiting",
-    "instagram recruiting",
-    "tiktok recruiting",
-    "talent acquisition",
-    "candidate sourcing",
-    "employer branding",
-    "recruitment marketing",
-    "hiring solutions",
-    "recruitment agency",
-    "digital recruitment",
-    "active sourcing",
-    "recruitment outsourcing",
-    "headhunting social media",
-    "personalvermittlung",
-    "social media recruiting deutschland",
-    "recruiting agentur",
-    "mitarbeitergewinnung",
-    "employer branding agentur",
-    "kandidatensourcing",
-    "talentgewinnung",
-    "SocialRecruit",
-    "don-sr.com",
+    "data entry services",
+    "data entry outsourcing",
+    "data cleaning",
+    "data migration",
+    "OCR data entry",
+    "CRM data entry",
+    "catalog data entry",
+    "form processing",
+    "data validation",
+    "spreadsheet data entry",
+    "Google Sheets data entry",
+    "Excel data entry",
+    "data entry agency",
+    "bulk data entry",
+    "Dateneingabe Service",
+    "Datenerfassung",
+    "Datenbereinigung",
+    "Datenmigration",
+    "DataEntry Pro",
   ],
-  authors: [{ name: "SocialRecruit", url: SITE_URL }],
-  creator: "SocialRecruit",
-  publisher: "SocialRecruit",
+  authors: [{ name: "DataEntry Pro", url: SITE_URL }],
+  creator: "DataEntry Pro",
+  publisher: "DataEntry Pro",
   formatDetection: {
     email: false,
     address: false,
@@ -73,20 +68,20 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "SocialRecruit",
-    title: "SocialRecruit – Social Media Recruitment Agency | Hire Top Talent via LinkedIn, Instagram & TikTok",
+    siteName: "DataEntry Pro",
+    title: "DataEntry Pro – Professional Data Entry Services | Fast, Accurate & Scalable",
     description:
-      "SocialRecruit sources qualified candidates through LinkedIn, Instagram & TikTok – 80% faster and 60% more cost-effective than traditional methods.",
+      "DataEntry Pro delivers professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, OCR processing – delivered in 24–72 hours.",
     url: absoluteUrl("/en"),
     locale: "en_US",
     alternateLocale: ["de_DE"],
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "SocialRecruit — Social Media Recruitment Agency" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "DataEntry Pro — Professional Data Entry Services" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SocialRecruit – Social Media Recruitment Agency | Hire Top Talent via LinkedIn, Instagram & TikTok",
+    title: "DataEntry Pro – Professional Data Entry Services | Fast, Accurate & Scalable",
     description:
-      "SocialRecruit sources qualified candidates through LinkedIn, Instagram & TikTok – 80% faster and 60% more cost-effective than traditional methods.",
+      "DataEntry Pro delivers professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, OCR processing – delivered in 24–72 hours.",
     images: [absoluteUrl("/og-image.jpg")],
   },
   alternates: {
@@ -102,11 +97,11 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "SocialRecruit",
+  name: "DataEntry Pro",
   url: SITE_URL,
   logo: absoluteUrl("/favicon.ico"),
   description:
-    "Social media recruitment agency specializing in talent acquisition through LinkedIn, Meta, TikTok, and professional networks for businesses in Germany and worldwide.",
+    "Professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, OCR processing, and bulk data entry delivered in 24–72 hours.",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
@@ -118,26 +113,25 @@ const organizationJsonLd = {
     { "@type": "Country", name: "Switzerland" },
     { "@type": "Place", name: "Worldwide" },
   ],
-  sameAs: ["https://linkedin.com/company/socialrecruit", "https://twitter.com/socialrecruit", "https://instagram.com/socialrecruit"],
+  sameAs: [],
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "SocialRecruit",
+  name: "DataEntry Pro",
   url: SITE_URL,
   inLanguage: ["en-US", "de-DE"],
-  publisher: { "@type": "Organization", name: "SocialRecruit" },
+  publisher: { "@type": "Organization", name: "DataEntry Pro" },
 };
 
-// Service schema for recruitment services
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: "Social Media Recruitment Services",
+  serviceType: "Data Entry Services",
   provider: {
     "@type": "Organization",
-    name: "SocialRecruit",
+    name: "DataEntry Pro",
     url: SITE_URL,
   },
   areaServed: [
@@ -148,66 +142,40 @@ const serviceJsonLd = {
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Recruitment Services",
+    name: "Data Entry Services",
     itemListElement: [
       {
         "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "LinkedIn Recruiting",
-          description: "Professional LinkedIn candidate sourcing and ABM campaigns",
-        },
+        itemOffered: { "@type": "Service", name: "Form & Document Processing", description: "Accurate data capture from paper forms, PDFs, and scans" },
       },
       {
         "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Meta Recruiting",
-          description: "Facebook and Instagram recruitment campaigns with UGC",
-        },
+        itemOffered: { "@type": "Service", name: "Data Cleaning & Normalization", description: "Deduplication, format standardization, and validation" },
       },
       {
         "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "TikTok Recruitment",
-          description: "Gen Z and Millennial talent acquisition through TikTok",
-        },
+        itemOffered: { "@type": "Service", name: "CRM & Sheet Migration", description: "Secure data migration with full field mapping and QA" },
       },
       {
         "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Employer Branding",
-          description: "Strategic employer brand content and positioning",
-        },
+        itemOffered: { "@type": "Service", name: "Catalog & Listing Management", description: "Product catalog and SKU data entry with validation" },
       },
       {
         "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Candidate Screening",
-          description: "Pre-screening and skills assessment of applicants",
-        },
+        itemOffered: { "@type": "Service", name: "OCR Data Entry", description: "OCR-assisted digitization of scanned documents" },
       },
     ],
   },
 };
 
-// LocalBusiness schema for Recruitment Agency
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
-  "@type": "EmploymentAgency",
-  name: "SocialRecruit",
+  "@type": "ProfessionalService",
+  name: "DataEntry Pro",
   url: SITE_URL,
   logo: absoluteUrl("/favicon.ico"),
   image: absoluteUrl("/og-image.jpg"),
-  description: "Social media recruitment agency specializing in talent acquisition through LinkedIn, Meta, TikTok, and professional networks",
-  sameAs: [
-    "https://linkedin.com/company/socialrecruit",
-    "https://twitter.com/socialrecruit",
-    "https://instagram.com/socialrecruit",
-  ],
+  description: "Professional data entry services with 99.9% accuracy. Forms, catalogs, CRM migrations, and OCR processing delivered in 24–72 hours.",
   priceRange: "€€",
   openingHoursSpecification: [
     {
