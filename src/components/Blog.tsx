@@ -77,7 +77,7 @@ export const Blog = () => {
                 {/* Image */}
                 <div className="relative h-44 sm:h-52 md:h-48 lg:h-56 overflow-hidden">
                   {post.image ? (
-                    <Image
+                    <Image 
                       src={post.image}
                       alt={post.title}
                       fill
