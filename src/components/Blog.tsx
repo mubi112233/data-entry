@@ -71,7 +71,7 @@ export const Blog = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Link
-                href={`/${currentLang}/blog/${slugify(post.title)}-${post.blogId || post.id}`}
+                href={`/${currentLang}/blog/${slugify(post.title)}-${post.blogId}`}
                 className="group bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 w-full block h-full"
               >
                 {/* Image */}
