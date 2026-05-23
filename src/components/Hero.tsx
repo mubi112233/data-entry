@@ -7,6 +7,7 @@ import { ArrowRight, Calendar, Sparkles, Users, Clock, Award } from "lucide-reac
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { siteConfig, localizedPath, type SiteLocale } from "@/lib/site-config";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyHero } from "@/data/dummy";
 
 export const Hero = () => {
@@ -23,6 +24,8 @@ export const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
 
   const [currentLang, setCurrentLang] = useState<string>("en");
+  const [heroData, setHeroData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -31,8 +34,44 @@ export const Hero = () => {
     setCurrentLang(raw === "de" ? "ge" : raw);
   }, []);
 
+  useEffect(() => {
+    const fetchHero = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.HERO + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Hero] API Response:', data);
+          
+          // Handle both array and object responses
+          const heroList = Array.isArray(data) ? data : data.hero || data.data;
+          if (heroList) {
+            // If array, pick the first one or the newest by ID
+            const hero = Array.isArray(heroList) ? heroList[0] : heroList;
+            if (hero) {
+              setHeroData(hero);
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('[Hero] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (currentLang) {
+      fetchHero();
+    }
+  }, [currentLang]);
+
   const isGe = currentLang === "ge";
-  const d = dummyHero[isGe ? "ge" : "en"];
+  const defaultData = dummyHero[isGe ? "ge" : "en"];
+  const d = heroData || defaultData;
 
   const statsLabels = isGe
     ? { clients: "Verarbeitete Datensätze", costSaved: "Ø Lieferzeit", rating: "Genauigkeit (QS)" }

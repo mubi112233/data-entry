@@ -197,8 +197,22 @@ export default async function HomeLangPage({
   const lang = rawLang === 'de' || rawLang === 'ge' ? 'ge' : 'en';
   const jsonLd = pageJsonLd(SITE_URL)[lang];
 
-  // FAQ data from dummy
-  const faqs = dummyFAQ[lang === 'ge' ? 'ge' : 'en'].slice(0, 10);
+  // Fetch FAQ data from API with fallback to dummy data
+  let faqs = dummyFAQ[lang === 'ge' ? 'ge' : 'en'].slice(0, 10);
+  try {
+    const faqData = await fetchApiData<any>(
+      API_ENDPOINTS.FAQ,
+      normalizeLanguage(lang)
+    );
+    if (faqData) {
+      const faqList = Array.isArray(faqData) ? faqData : faqData.faqs || faqData.data || [];
+      if (faqList.length > 0) {
+        faqs = faqList.slice(0, 10);
+      }
+    }
+  } catch (error) {
+    console.warn('[FAQ Schema] Failed to fetch from API, using fallback:', error);
+  }
 
   // Generate FAQ schema
   const faqSchema = faqs.length > 0

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { localizedPath, siteConfig, localeUrlPrefix, type SiteLocale } from "@/lib/site-config";
+import { fetchAPI, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyCaseStudies } from "@/data/dummy";
 
 const slugify = (title: string | undefined | null) => {
@@ -17,7 +18,29 @@ const slugify = (title: string | undefined | null) => {
 };
 
 export async function CaseStudies({ lang }: { lang: string }) {
-  const studies = dummyCaseStudies[lang === 'ge' ? 'ge' : 'en'];
+  let studies = dummyCaseStudies[lang === 'ge' ? 'ge' : 'en'];
+
+  // Try to fetch from API
+  try {
+    const response = await fetchAPI(
+      API_ENDPOINTS.CASE_STUDIES + `?lang=${normalizeLanguage(lang)}`,
+      {}
+    );
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('[CaseStudies] API Response:', data);
+      
+      // Handle both array and object responses
+      const caseStudiesList = Array.isArray(data) ? data : data.caseStudies || data.studies || data.data || [];
+      if (caseStudiesList.length > 0) {
+        studies = caseStudiesList;
+      }
+    }
+  } catch (error) {
+    console.warn('[CaseStudies] Failed to fetch from API, using fallback:', error);
+  }
+
   const copy = getCopy(lang, "caseStudies");
   const urlSeg = localeUrlPrefix((lang === "ge" ? "ge" : "en") as SiteLocale);
 

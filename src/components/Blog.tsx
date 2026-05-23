@@ -5,8 +5,10 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyBlogs } from "@/data/dummy";
 
 const decodeHtml = (value: string) => {
@@ -33,7 +35,38 @@ export const Blog = () => {
   const pathname = usePathname();
   const currentLang = pathname.startsWith("/ge") || pathname.startsWith("/de") ? "ge" : "en";
   const copy = getCopy(currentLang, "blog");
-  const posts = dummyBlogs[currentLang as keyof typeof dummyBlogs];
+  
+  const [posts, setPosts] = useState<any[]>(dummyBlogs[currentLang as keyof typeof dummyBlogs]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.BLOGS + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Blog] API Response:', data);
+          
+          // Handle both array and object responses
+          const blogList = Array.isArray(data) ? data : data.blogs || data.data || [];
+          if (blogList.length > 0) {
+            setPosts(blogList);
+          }
+        }
+      } catch (error) {
+        console.warn('[Blog] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [currentLang]);
 
   return (
     <motion.section

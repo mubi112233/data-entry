@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Calendar, UserCheck, Rocket, LineChart } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyHowItWorks } from "@/data/dummy";
 
 const iconMap = { Calendar, UserCheck, Rocket, LineChart };
@@ -16,7 +18,38 @@ export const HowItWorks = () => {
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
   const copy = sectionCopy[currentLang as keyof typeof sectionCopy];
-  const displaySteps = dummyHowItWorks[currentLang as keyof typeof dummyHowItWorks];
+  
+  const [displaySteps, setDisplaySteps] = useState(dummyHowItWorks[currentLang as keyof typeof dummyHowItWorks]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSteps = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.HOW_IT_WORKS + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[HowItWorks] API Response:', data);
+          
+          // Handle both array and object responses
+          const stepsList = Array.isArray(data) ? data : data.steps || data.data || [];
+          if (stepsList.length > 0) {
+            setDisplaySteps(stepsList);
+          }
+        }
+      } catch (error) {
+        console.warn('[HowItWorks] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSteps();
+  }, [currentLang]);
 
   return (
     <motion.section

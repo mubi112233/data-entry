@@ -8,10 +8,32 @@ import { Blog } from "@/components/Blog";
 import { FAQInteractive } from "@/components/FAQInteractive.client";
 import { FinalCTA } from "@/components/FinalCTA.server";
 import { SPACING } from "@/lib/constants";
+import { fetchAPI, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyFAQ } from "@/data/dummy";
 
 export async function HomeBelowFold({ lang }: { lang: string }) {
-  const faqData = dummyFAQ[lang === 'ge' ? 'ge' : 'en'];
+  let faqData = dummyFAQ[lang === 'ge' ? 'ge' : 'en'];
+
+  // Try to fetch from API
+  try {
+    const response = await fetchAPI(
+      API_ENDPOINTS.FAQ + `?lang=${normalizeLanguage(lang)}`,
+      {}
+    );
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('[FAQ] API Response:', data);
+      
+      // Handle both array and object responses
+      const faqList = Array.isArray(data) ? data : data.faqs || data.data || [];
+      if (faqList.length > 0) {
+        faqData = faqList;
+      }
+    }
+  } catch (error) {
+    console.warn('[FAQ] Failed to fetch from API, using fallback:', error);
+  }
 
   return (
     <>
@@ -29,5 +51,8 @@ export async function HomeBelowFold({ lang }: { lang: string }) {
     </>
   );
 }
+
+
+
 
 

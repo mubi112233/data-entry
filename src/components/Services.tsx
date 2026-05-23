@@ -4,6 +4,8 @@ import { Instagram, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyServices } from "@/data/dummy";
 
 const sectionCopy = {
@@ -23,7 +25,38 @@ export const Services = () => {
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
   const copy = sectionCopy[currentLang as keyof typeof sectionCopy];
-  const services = dummyServices[currentLang as keyof typeof dummyServices];
+  
+  const [services, setServices] = useState(dummyServices[currentLang as keyof typeof dummyServices]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.SERVICES + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Services] API Response:', data);
+          
+          // Handle both array and object responses
+          const servicesList = Array.isArray(data) ? data : data.services || data.data || [];
+          if (servicesList.length > 0) {
+            setServices(servicesList);
+          }
+        }
+      } catch (error) {
+        console.warn('[Services] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, [currentLang]);
 
   return (
     <motion.section

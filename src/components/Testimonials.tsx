@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyTestimonials } from "@/data/dummy";
 
 interface Testimonial {
@@ -21,7 +23,39 @@ export const Testimonials = () => {
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
   const copy = getCopy(currentLang, 'testimonials');
-  const testimonials: Testimonial[] = dummyTestimonials[currentLang as keyof typeof dummyTestimonials];
+  
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(dummyTestimonials[currentLang as keyof typeof dummyTestimonials]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.TESTIMONIALS + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Testimonials] API Response:', data);
+          
+          // Handle both array and object responses
+          const testimonialsList = Array.isArray(data) ? data : data.testimonials || data.data || [];
+          if (testimonialsList.length > 0) {
+            setTestimonials(testimonialsList);
+          }
+        }
+      } catch (error) {
+        console.warn('[Testimonials] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, [currentLang]);
+
   return (
     <motion.section
       id="testimonials"

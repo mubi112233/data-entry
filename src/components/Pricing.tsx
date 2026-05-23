@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { getCopy } from "@/lib/copy";
 import { siteConfig, localizedPath } from "@/lib/site-config";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 
 // Constants
 const MAX_VA_COUNT = 10;
@@ -14,7 +15,7 @@ const BULK_DISCOUNT_RATE = 0.03;
 
 // TypeScript Interface
 interface PricingPlan {
-  id: 'starter' | 'professional' | 'enterprise';
+  id: string;
   name: string;
   hours: string;
   price: number;
@@ -24,7 +25,7 @@ interface PricingPlan {
   badge?: string;
 }
 
-const plans: PricingPlan[] = [
+const defaultPlans: PricingPlan[] = [
   {
     id: 'starter',
     name: "Starter",
@@ -81,6 +82,8 @@ const plans: PricingPlan[] = [
 
 export const Pricing = () => {
   const [vaCount, setVaCount] = useState(1);
+  const [plans, setPlans] = useState<PricingPlan[]>(defaultPlans);
+  const [isLoading, setIsLoading] = useState(true);
   
   const getLangFromPath = () => {
     const match = window.location.pathname.match(/^\/(en|ge|de)\b/i);
@@ -93,6 +96,35 @@ export const Pricing = () => {
   useEffect(() => {
     setCurrentLang(getLangFromPath());
   }, []);
+
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.PRICING + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Pricing] API Response:', data);
+          
+          // Handle both array and object responses
+          const pricingList = Array.isArray(data) ? data : data.pricing || data.plans || data.data || [];
+          if (pricingList.length > 0) {
+            setPlans(pricingList);
+          }
+        }
+      } catch (error) {
+        console.warn('[Pricing] Failed to fetch from API, using default plans:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPricing();
+  }, [currentLang]);
 
   const copy = getCopy(currentLang, 'pricing');
   

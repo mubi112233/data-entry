@@ -2,10 +2,11 @@
 
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Award, Sparkles } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import * as LucideIcons from "lucide-react";
 import { SPACING } from "@/lib/constants";
 import { usePathname } from "next/navigation";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyWhyChooseUs } from "@/data/dummy";
 
 const getIconComponent = (iconName: string) => {
@@ -22,7 +23,39 @@ export const WhyChooseUs = () => {
 
   const pathname = usePathname();
   const currentLang = pathname.startsWith('/ge') || pathname.startsWith('/de') ? 'ge' : 'en';
-  const data = dummyWhyChooseUs[currentLang as keyof typeof dummyWhyChooseUs];
+  
+  const [data, setData] = useState(dummyWhyChooseUs[currentLang as keyof typeof dummyWhyChooseUs]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchWhyChooseUs = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetchAPIClient(
+          API_ENDPOINTS.WHY_CHOOSE_US + `?lang=${normalizeLanguage(currentLang)}`,
+          {}
+        );
+        
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log('[WhyChooseUs] API Response:', responseData);
+          
+          // Ensure we have the right structure
+          const whyData = Array.isArray(responseData) ? responseData[0] : responseData;
+          if (whyData && (whyData.badge || whyData.items)) {
+            setData(whyData);
+          }
+        }
+      } catch (error) {
+        console.warn('[WhyChooseUs] Failed to fetch from API, using fallback:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWhyChooseUs();
+  }, [currentLang]);
+
   const { badge, heading, description, items } = data;
 
   return (
