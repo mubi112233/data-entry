@@ -83,14 +83,14 @@ const defaultPlans: PricingPlan[] = [
 export const Pricing = () => {
   const [vaCount, setVaCount] = useState(1);
   const [plans, setPlans] = useState<PricingPlan[]>(defaultPlans);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   
   const getLangFromPath = () => {
     const match = window.location.pathname.match(/^\/(en|ge|de)\b/i);
     const raw = match?.[1]?.toLowerCase() || "en";
     return raw === "de" ? "ge" : raw;
   };
-
+    
   const [currentLang, setCurrentLang] = useState<string>("en");
 
   useEffect(() => {
@@ -380,10 +380,11 @@ export const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 max-w-7xl mx-auto">
           {plans.map((plan, index) => {
-            const localizedName = copy.plans[plan.id].name || plan.name;
-            const localizedHours = copy.plans[plan.id].hours || plan.hours;
-            // const localizedBadge = (plan as any).badge ? copy.plans[plan.id]?.badge : undefined;
-            const localizedFeatures = copy.plans[plan.id].features || plan.features;
+            const planKey = plan.id as keyof typeof copy.plans;
+            const localizedName = copy.plans[planKey]?.name || plan.name;
+            const localizedHours = copy.plans[planKey]?.hours || plan.hours;
+            // const localizedBadge = (plan as any).badge ? copy.plans[planKey]?.badge : undefined;
+            const localizedFeatures = copy.plans[planKey]?.features || plan.features;
             
             return (
             <motion.div 
