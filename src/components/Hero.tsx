@@ -71,15 +71,27 @@ export const Hero = () => {
 
   const isGe = currentLang === "ge";
   const defaultData = dummyHero[isGe ? "ge" : "en"];
+
+  // Normalize API stats shape → internal shape
+  const normalizeStats = (stats: any) => {
+    if (!stats) return defaultData.stats;
+    return {
+      clients: stats.clients ?? stats.costSaving ?? defaultData.stats.clients,
+      costSaved: stats.turnaround ?? stats.costSaved ?? defaultData.stats.costSaved,
+      rating: stats.accuracy ?? stats.rating ?? defaultData.stats.rating,
+    };
+  };
+
   const d = {
     ...defaultData,
     ...(heroData || {}),
-    stats: heroData?.stats ?? defaultData.stats,
+    stats: normalizeStats(heroData?.stats),
   };
 
+  // Use stat values directly as labels (they come pre-labelled from the API)
   const statsLabels = isGe
-    ? { clients: "Verarbeitete Datensätze", costSaved: "Ø Lieferzeit", rating: "Genauigkeit (QS)" }
-    : { clients: "Records Processed", costSaved: "Avg Turnaround", rating: "Accuracy (QA)" };
+    ? { clients: "Kunden", costSaved: "Lieferzeit", rating: "Genauigkeit" }
+    : { clients: "Clients Served", costSaved: "Turnaround", rating: "Accuracy" };
 
   return (
     <motion.section
@@ -113,10 +125,7 @@ export const Hero = () => {
 
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 leading-[1.1] sm:leading-[1.08] md:leading-[1.05] text-green-800 dark:text-foreground">
-              {d.title}{" "}
-              <span className="bg-gradient-to-r from-green-600 to-green-800 dark:from-[hsl(var(--gold))] dark:to-[hsl(var(--brand-blue))] bg-clip-text text-transparent">
-                Data Entry Services
-              </span>
+              {d.title}
             </h1>
 
             {/* Subtitle */}

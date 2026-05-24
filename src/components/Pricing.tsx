@@ -261,7 +261,7 @@ export const Pricing = () => {
             className="inline-block px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-gradient-to-r from-primary to-accent text-primary-foreground text-xs sm:text-sm font-bold rounded-full mb-2 sm:mb-3 md:mb-4 shadow-lg"
             whileHover={{ scale: 1.05 }}
           >
-            {copy.sectionBadge || "Transparent Pricing for Social Recruitment"}
+            {copy.sectionBadge || "Transparent Pricing"}
           </motion.span>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 text-foreground leading-tight">
             {copy.sectionTitle || "Simple, Usage-Based Packages"}
@@ -302,7 +302,7 @@ export const Pricing = () => {
               style={{
                 backgroundImage: 'none'
               }}
-              aria-label="Select your recruitment plan"
+              aria-label="Select your data entry plan"
               aria-describedby="plan-count-description"
             >
               {Array.from({ length: MAX_VA_COUNT }, (_, i) => i + 1).map(num => (

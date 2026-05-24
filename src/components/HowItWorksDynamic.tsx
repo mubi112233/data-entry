@@ -30,16 +30,16 @@ interface HowItWorksStep {
 
 const headerCopy = {
   en: {
-    badge: "How It Works",
-    heading: "Get started in <span class=\"text-[hsl(270,80%,75%)]\">4 simple steps</span>",
+    badge: "Data Entry in 4 Steps",
+    heading: "How It <span class=\"text-[hsl(270,80%,75%)]\">Works</span>",
     description:
-      "From onboarding to measurable results — our process is designed to be fast, clear, and efficient.",
+      "From scoping to delivery in 24–72 hours for most projects. Clear rules, consistent outputs, and measurable quality.",
   },
   ge: {
-    badge: "Wie es funktioniert",
-    heading: "Starten Sie in <span class=\"text-[hsl(270,80%,75%)]\">4 einfachen Schritten</span>",
+    badge: "Dateneingabe in 4 Schritten",
+    heading: "So funktioniert <span class=\"text-[hsl(270,80%,75%)]\">es</span>",
     description:
-      "Vom Onboarding bis zu messbaren Ergebnissen – unser Prozess ist schnell, klar und effizient.",
+      "Von der Planung bis zur Lieferung in 24–72 Stunden bei den meisten Projekten. Klare Regeln, konsistente Ergebnisse und messbare Qualität.",
   },
 } as const;
 
@@ -47,52 +47,52 @@ const fallbackStepsCopy: Record<string, HowItWorksStep[]> = {
   en: [
     {
       stepNumber: 1,
-      title: "Schedule a Free Strategy Call",
-      description: "Book a 15-minute call with our team to discuss your hiring challenges and talent needs.",
+      title: "Intake & Scoping",
+      description: "Share samples and rules. We confirm fields, validations, volumes, SLAs, and delivery format (Sheets, CSV, CRM).",
       icon: "Calendar"
     },
     {
       stepNumber: 2,
-      title: "Setup & Automation",
-      description: "We set up smart sourcing workflows, automation, and tracking to find your ideal candidates.",
+      title: "Template & Sample",
+      description: "We build a spreadsheet-style template and deliver a free sample so you can review structure and quality.",
       icon: "UserCheck"
     },
     {
       stepNumber: 3,
-      title: "Daily Management Begins",
-      description: "Our team starts sourcing candidates daily—screening, engaging, and delivering qualified talent.",
+      title: "Data Entry & Validation",
+      description: "Our team enters data with keyboard-first shortcuts and automated checks to prevent duplicates and format issues.",
       icon: "Rocket"
     },
     {
       stepNumber: 4,
-      title: "Watch Your Productivity Grow",
-      description: "See your hiring speed soar as our social media sourcing delivers qualified candidates 80% faster.",
+      title: "QA & Delivery",
+      description: "Second-pass QA, issue fixes, and final delivery. Ongoing maintenance available for weekly or monthly updates.",
       icon: "LineChart"
     }
   ],
   ge: [
     {
       stepNumber: 1,
-      title: "Kostenlosen Strategieanruf vereinbaren",
-      description: "Vereinbaren Sie einen 15-minütigen Anruf mit unserem Team, um Ihre Recruiting-Herausforderungen zu besprechen.",
+      title: "Intake & Abgrenzung",
+      description: "Sie teilen Beispiele und Regeln. Wir bestätigen Felder, Validierungen, Volumen, SLAs und das Lieferformat (Sheets, CSV, CRM).",
       icon: "Calendar"
     },
     {
       stepNumber: 2,
-      title: "Setup & Automatisierung",
-      description: "Wir konfigurieren intelligente Sourcing-Workflows, Automatisierung und Tracking zur Kandidatenfindung.",
+      title: "Vorlage & Muster",
+      description: "Wir erstellen eine Tabellen-Vorlage und liefern ein kostenloses Muster, damit Sie Struktur und Qualität prüfen können.",
       icon: "UserCheck"
     },
     {
       stepNumber: 3,
-      title: "Tägliches Management beginnt",
-      description: "Unser Team beginnt mit dem täglichen Kandidaten-Sourcing – screenen, kontaktieren, qualifizierte Talente liefern.",
+      title: "Dateneingabe & Validierung",
+      description: "Unser Team erfasst Daten mit Tastatur-Shortcuts und automatischen Prüfungen, um Duplikate und Formatfehler zu vermeiden.",
       icon: "Rocket"
     },
     {
       stepNumber: 4,
-      title: "Sehen Sie Ihre Produktivität steigen",
-      description: "Erleben Sie, wie Ihre Einstellungsgeschwindigkeit steigt, während unser Social-Media-Sourcing 80% schneller qualifizierte Kandidaten liefert.",
+      title: "QS & Lieferung",
+      description: "Zweitprüfung, Fehlerbehebung und finale Lieferung. Laufende Wartung für wöchentliche oder monatliche Updates verfügbar.",
       icon: "LineChart"
     }
   ]

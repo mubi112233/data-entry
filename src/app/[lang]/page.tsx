@@ -8,34 +8,42 @@ import { generateFAQSchema, generateBreadcrumbSchema } from "@/lib/structured-da
 import { SITE_URL, absoluteUrl, hreflangAlternates, publicLocalePathSegment } from "@/lib/site-url";
 import { dummyFAQ } from "@/data/dummy";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const SUPPORTED_LANGS = ['en', 'ge', 'de'];
+
+const RECRUITMENT_TERMS = /recruit|hiring|candidate|talent|sourcing|linkedin|social media/i;
+
+function sanitizeMeta(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  return RECRUITMENT_TERMS.test(value) ? undefined : value;
+}
 
 async function getHeroMeta(lang: string) {
   try {
     const data = await fetchApiData<{ hero: any | any[] }>(API_ENDPOINTS.HERO, normalizeLanguage(lang));
     if (!data?.hero) return null;
 
-    // Handle array response (multiple heroes)
+    let hero: any;
     if (Array.isArray(data.hero)) {
       // Prefer hero with metaTitle/metaDescription for SEO, then fall back to newest
       const withMeta = data.hero.find((h: any) => h.metaTitle || h.metaDescription);
-      if (withMeta) {
-        console.log(`[getHeroMeta] Found hero with SEO meta:`, withMeta._id);
-        return withMeta;
-      }
-      // Sort by _id (newest first - MongoDB ObjectId contains timestamp)
-      const sorted = data.hero.sort((a: any, b: any) => {
-        const idA = a._id || '';
-        const idB = b._id || '';
-        return idB.localeCompare(idA);
-      });
-      console.log(`[getHeroMeta] Found ${sorted.length} heroes, using newest:`, sorted[0]?._id);
-      return sorted[0] || null;
+      const sorted = [...data.hero].sort((a: any, b: any) =>
+        (b._id || '').localeCompare(a._id || '')
+      );
+      hero = withMeta || sorted[0] || null;
+    } else {
+      hero = data.hero;
     }
 
-    return data.hero;
+    if (!hero) return null;
+
+    // Strip any recruitment-era values that may still be in the DB
+    return {
+      ...hero,
+      metaTitle: sanitizeMeta(hero.metaTitle),
+      metaDescription: sanitizeMeta(hero.metaDescription),
+    };
   } catch {
     return null;
   }
@@ -49,7 +57,6 @@ export async function generateMetadata({
   const { lang: rawLang } = await params;
   const lang = rawLang === 'de' || rawLang === 'ge' ? 'ge' : 'en';
   const hero = await getHeroMeta(lang);
-  console.log("[generateMetadata] hero data:", JSON.stringify({ metaTitle: hero?.metaTitle, metaDescription: hero?.metaDescription, metaKeywords: hero?.metaKeywords, title: hero?.title, _id: hero?._id }));
 
   const title =
     hero?.metaTitle ||

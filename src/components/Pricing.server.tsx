@@ -19,33 +19,33 @@ const plans: PricingPlan[] = [
   {
     id: 'starter',
     name: "Starter",
-    hours: "Up to 3 hires/month",
-    price: 369,
-    setupFee: 149,
+    hours: "Up to 1k records/mo",
+    price: 299,
+    setupFee: 99,
     features: [
-      "Candidate Sourcing & Filtering",
-      "LinkedIn Profile Screening",
-      "Basic Outreach Automation",
-      "Candidate Response Templates",
-      "Weekly Performance Reports"
+      "Form & document processing",
+      "Basic data validation",
+      "Spreadsheet template setup",
+      "Weekly delivery",
+      "Email support"
     ],
     highlighted: false,
-    badge: "Perfect for individuals"
+    badge: "Perfect for small teams"
   },
   {
     id: 'professional',
-    name: "Professional",
-    hours: "Up to 10 hires/month",
-    price: 629,
+    name: "Growth",
+    hours: "Up to 10k records/mo",
+    price: 599,
     setupFee: 0,
     features: [
       "Everything in Starter",
-      "No Setup Fee",
-      "Multi-Platform Sourcing (LinkedIn, Instagram)",
-      "Recruitment Campaign Management",
-      "2-Hour Response Time SLA",
-      "Daily Pipeline Summaries + Analytics",
-      "Priority Support"
+      "No setup fee",
+      "Data cleaning & normalization",
+      "Catalog & listing management",
+      "CRM/Sheet migration",
+      "Second-pass QA included",
+      "Priority support"
     ],
     highlighted: true,
     badge: undefined
@@ -53,19 +53,19 @@ const plans: PricingPlan[] = [
   {
     id: 'enterprise',
     name: "Enterprise",
-    hours: "Unlimited hires",
-    price: 1169,
+    hours: "50k+ records & custom",
+    price: 1199,
     setupFee: 0,
     highlighted: false,
     badge: "Best Value",
     features: [
-      "Everything in Professional",
-      "No Setup Fee",
-      "Dedicated Recruiting Manager",
-      "Enterprise Security Protocols",
-      "Custom Integrations & API",
-      "24/7 Monitoring & Support",
-      "Custom SLAs & Compliance"
+      "Everything in Growth",
+      "No setup fee",
+      "Dedicated data entry manager",
+      "Web research & data collection",
+      "Custom integrations & API",
+      "24/7 monitoring & support",
+      "Custom SLAs & compliance"
     ]
   }
 ];

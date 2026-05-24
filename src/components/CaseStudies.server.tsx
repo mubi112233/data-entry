@@ -7,6 +7,8 @@ import { localizedPath, siteConfig, localeUrlPrefix, type SiteLocale } from "@/l
 import { fetchAPI, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyCaseStudies } from "@/data/dummy";
 
+export const revalidate = 300;
+
 const slugify = (title: string | undefined | null) => {
   if (!title) return "untitled";
   return title
@@ -34,11 +36,20 @@ export async function CaseStudies({ lang }: { lang: string }) {
       // Handle both array and object responses
       const caseStudiesList = Array.isArray(data) ? data : data.caseStudies || data.studies || data.data || [];
       if (caseStudiesList.length > 0) {
-        studies = caseStudiesList;
+        // Normalize API fields to match component expectations
+        studies = caseStudiesList.map((s: any) => ({
+          ...s,
+          id: s.id ?? s.caseStudyId ?? s._id,
+          stats: s.stats ?? {
+            costSaved: s.results?.[0] ?? "",
+            timeframe: s.results?.[1] ?? "",
+            vaCount: s.results?.[2] ?? "",
+          },
+        }));
       }
     }
   } catch (error) {
-    console.warn('[CaseStudies] Failed to fetch from API, using fallback:', error);
+    console.error('[CaseStudies] API fetch failed, showing dummy data:', error);
   }
 
   const copy = getCopy(lang, "caseStudies");

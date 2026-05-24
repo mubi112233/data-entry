@@ -78,9 +78,7 @@ const nextConfig = {
       },
     ];
   },
-  output: {
-    fileTracingRoot: __dirname,
-  },
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;
