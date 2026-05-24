@@ -71,7 +71,11 @@ export const Hero = () => {
 
   const isGe = currentLang === "ge";
   const defaultData = dummyHero[isGe ? "ge" : "en"];
-  const d = heroData || defaultData;
+  const d = {
+    ...defaultData,
+    ...(heroData || {}),
+    stats: heroData?.stats ?? defaultData.stats,
+  };
 
   const statsLabels = isGe
     ? { clients: "Verarbeitete Datensätze", costSaved: "Ø Lieferzeit", rating: "Genauigkeit (QS)" }

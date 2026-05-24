@@ -13,6 +13,7 @@ import {
 
 export function DesignTokensProvider({ children }: { children: React.ReactNode }) {
   const [tokens, setTokensState] = useState<Tokens>(() => {
+    if (typeof window === "undefined") return DEFAULT_TOKENS;
     try {
       // Clean up old design-system provider cache
       localStorage.removeItem("design-theme");
@@ -22,7 +23,6 @@ export function DesignTokensProvider({ children }: { children: React.ReactNode }
       const normalized = normalizeStoredTokens(parsed);
       return { ...DEFAULT_TOKENS, ...normalized } as Tokens;
     } catch {
-      void 0;
       return DEFAULT_TOKENS;
     }
   });
