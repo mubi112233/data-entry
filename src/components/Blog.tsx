@@ -53,8 +53,15 @@ export const Blog = () => {
           const data = await response.json();
           console.log('[Blog] API Response:', data);
           
-          // Handle both array and object responses
-          const blogList = Array.isArray(data) ? data : data.blogs || data.data || [];
+          // API shape: { blogs: [{ blog_1: {...}, blog_2: {...}, ... }] }
+          const blogsArray: any[] = Array.isArray(data) ? data : (data.blogs ?? []);
+          const wrapper = blogsArray[0] ?? null;
+          const blogList = wrapper
+            ? Object.keys(wrapper)
+                .filter((k) => k.startsWith("blog_"))
+                .sort((a, b) => parseInt(a.replace("blog_", "")) - parseInt(b.replace("blog_", "")))
+                .map((k) => wrapper[k])
+            : [];
           if (blogList.length > 0) {
             setPosts(blogList.map((p: any) => ({
               ...p,
@@ -67,6 +74,7 @@ export const Blog = () => {
               author: p.author ?? "",
             })));
           }
+          // if blogList is empty, keep dummy fallback already in state
         }
       } catch (error) {
         console.warn('[Blog] Failed to fetch from API, using fallback:', error);
