@@ -86,8 +86,8 @@ export function FAQInteractive({ lang }: { lang: string }) {
                     value={`item-${index}`}
                     className="bg-card border border-border rounded-lg sm:rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300"
                   >
-                    <AccordionTrigger className="text-left text-base sm:text-lg md:text-xl font-semibold text-foreground hover:text-primary py-5 sm:py-6 hover:no-underline transition-colors [&[data-state=open]>span>span:first-child]:bg-primary [&[data-state=open]>span>span:first-child]:text-primary-foreground">
-                      <span className="flex items-start gap-3">
+                    <AccordionTrigger className="text-left text-base sm:text-lg md:text-xl font-semibold text-foreground hover:text-primary py-5 sm:py-6 pl-6 sm:pl-7 md:pl-8 pr-5 sm:pr-6 hover:no-underline transition-colors [&[data-state=open]>span>span:first-child]:bg-primary [&[data-state=open]>span>span:first-child]:text-primary-foreground">
+                      <span className="flex items-start gap-4">
                         <span className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary/10 flex items-center justify-center text-primary text-sm font-bold mt-0.5 transition-colors">
                           {index + 1}
                         </span>
