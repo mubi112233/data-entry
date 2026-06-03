@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, Video, CheckCircle2, ArrowLeft, Menu, X, Star, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -236,11 +237,14 @@ export default function BookMeetingClient() {
           <div className="lg:col-span-3 order-first lg:order-last">
             <div className="lg:sticky lg:top-24">
               <div className="bg-card border border-border rounded-xl p-2 shadow-lg">
-                <iframe
-                  src={`${CALENDLY_URL}?embed_type=Inline`}
-                  className="rounded-lg"
-                  style={{ minWidth: "100%", height: "600px", border: "none" }}
-                  title="Book a meeting"
+                <div
+                  className="calendly-inline-widget rounded-lg"
+                  data-url={`${CALENDLY_URL}?hide_gdpr_banner=1`}
+                  style={{ minWidth: "100%", height: "600px" }}
+                />
+                <Script
+                  src="https://assets.calendly.com/assets/external/widget.js"
+                  strategy="lazyOnload"
                 />
               </div>
               <div className="mt-4 p-4 bg-green-600/5 border border-green-600/20 rounded-lg text-center">

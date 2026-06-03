@@ -1,13 +1,14 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { localizedPath, siteConfig, localeUrlPrefix, type SiteLocale } from "@/lib/site-config";
-import { fetchAPI, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
 import { dummyCaseStudies } from "@/data/dummy";
-
-export const revalidate = 300;
 
 const slugify = (title: string | undefined | null) => {
   if (!title) return "untitled";
@@ -19,54 +20,41 @@ const slugify = (title: string | undefined | null) => {
     .trim();
 };
 
-export async function CaseStudies({ lang }: { lang: string }) {
-  let studies = dummyCaseStudies[lang === 'ge' ? 'ge' : 'en'];
+export function CaseStudies({ lang }: { lang: string }) {
+  const fallback = dummyCaseStudies[lang === "ge" ? "ge" : "en"];
+  const [studies, setStudies] = useState(fallback);
 
-  // Try to fetch from API
-  try {
-    const response = await fetchAPI(
-      API_ENDPOINTS.CASE_STUDIES + `?lang=${normalizeLanguage(lang)}`,
-      {}
-    );
-    
-    if (response.ok) {
-      const data = await response.json();
-      console.log('[CaseStudies] API Response:', data);
-      
-      // Handle both array and object responses
-      const caseStudiesList = Array.isArray(data) ? data : data.caseStudies || data.studies || data.data || [];
-      if (caseStudiesList.length > 0) {
-        // Normalize API fields to match component expectations
-        studies = caseStudiesList.map((s: any) => ({
-          ...s,
-          id: s.id ?? s.caseStudyId ?? s._id,
-          stats: s.stats ?? {
-            costSaved: s.results?.[0] ?? "",
-            timeframe: s.results?.[1] ?? "",
-            vaCount: s.results?.[2] ?? "",
-          },
-        }));
-      }
-    }
-  } catch (error) {
-    console.error('[CaseStudies] API fetch failed, showing dummy data:', error);
-  }
+  useEffect(() => {
+    fetchAPIClient(API_ENDPOINTS.CASE_STUDIES + `?lang=${normalizeLanguage(lang)}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (!data) return;
+        const list = Array.isArray(data) ? data : data.caseStudies || data.studies || data.data || [];
+        if (list.length > 0) {
+          setStudies(list.map((s: any) => ({
+            ...s,
+            id: s.id ?? s.caseStudyId ?? s._id,
+            stats: s.stats ?? {
+              costSaved: s.results?.[0] ?? "",
+              timeframe: s.results?.[1] ?? "",
+              vaCount: s.results?.[2] ?? "",
+            },
+          })));
+        }
+      })
+      .catch(() => {/* keep fallback */});
+  }, [lang]);
 
   const copy = getCopy(lang, "caseStudies");
   const urlSeg = localeUrlPrefix((lang === "ge" ? "ge" : "en") as SiteLocale);
 
   if (!studies.length) {
     return (
-      <section
-        id="case-studies"
-        className="relative py-8 sm:py-10 md:py-12 lg:py-14 bg-background"
-      >
+      <section id="case-studies" className="relative py-8 sm:py-10 md:py-12 lg:py-14 bg-background">
         <div className={`container mx-auto ${SPACING.container}`}>
           <div className="text-center py-20">
             <p className="text-muted-foreground mb-4">
-              {lang === "ge"
-                ? "Keine Fallstudien verfügbar."
-                : "No case studies available."}
+              {lang === "ge" ? "Keine Fallstudien verfügbar." : "No case studies available."}
             </p>
           </div>
         </div>
@@ -75,10 +63,7 @@ export async function CaseStudies({ lang }: { lang: string }) {
   }
 
   return (
-    <section
-      id="case-studies"
-      className="relative py-12 sm:py-16 md:py-20 lg:py-24 bg-background"
-    >
+    <section id="case-studies" className="relative py-12 sm:py-16 md:py-20 lg:py-24 bg-background">
       <div className="absolute top-0 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/5 rounded-full blur-[100px] md:blur-[150px]" />
       <div className="absolute bottom-0 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/5 rounded-full blur-[100px] md:blur-[150px]" />
 
@@ -157,9 +142,7 @@ export async function CaseStudies({ lang }: { lang: string }) {
 
         <div className="mt-12 sm:mt-16 lg:mt-20 text-center">
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto">
-            {lang === "ge"
-              ? "Bereit, ähnliche Ergebnisse zu erzielen?"
-              : "Ready to achieve similar results?"}
+            {lang === "ge" ? "Bereit, ähnliche Ergebnisse zu erzielen?" : "Ready to achieve similar results?"}
           </p>
           <Link
             href={localizedPath((lang === "ge" ? "ge" : "en") as SiteLocale, siteConfig.routes.bookMeeting)}
@@ -175,5 +158,3 @@ export async function CaseStudies({ lang }: { lang: string }) {
     </section>
   );
 }
-
-

@@ -6,15 +6,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Zap } from "lucide-react";
 import { getCopy } from "@/lib/copy";
-import type { FAQItem } from "@/lib/api";
+import { fetchAPIClient, API_ENDPOINTS, normalizeLanguage, type FAQItem } from "@/lib/api";
+import { dummyFAQ } from "@/data/dummy";
 
-export function FAQInteractive({ faqs, lang }: { faqs: FAQItem[]; lang: string }) {
+export function FAQInteractive({ lang }: { lang: string }) {
   const copy = getCopy(lang, "faq");
   const [openItem, setOpenItem] = useState<string>("");
+  const [faqs, setFaqs] = useState<FAQItem[]>(dummyFAQ[lang === "ge" ? "ge" : "en"]);
+
+  useEffect(() => {
+    fetchAPIClient(API_ENDPOINTS.FAQ + `?lang=${normalizeLanguage(lang)}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (!data) return;
+        const list = Array.isArray(data) ? data : data.faqs || data.data || [];
+        if (list.length > 0) setFaqs(list);
+      })
+      .catch(() => {/* keep fallback */});
+  }, [lang]);
 
   return (
     <section
