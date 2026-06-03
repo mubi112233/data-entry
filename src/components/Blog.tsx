@@ -22,7 +22,8 @@ const decodeHtml = (value: string) => {
     .replace(/&amp;/g, "&");
 };
 
-const slugify = (title: string) => {
+const slugify = (title: string | undefined | null) => {
+  if (!title) return "untitled";
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
@@ -55,7 +56,16 @@ export const Blog = () => {
           // Handle both array and object responses
           const blogList = Array.isArray(data) ? data : data.blogs || data.data || [];
           if (blogList.length > 0) {
-            setPosts(blogList);
+            setPosts(blogList.map((p: any) => ({
+              ...p,
+              blogId: p.blogId ?? p._id,
+              title: p.title ?? "",
+              excerpt: p.excerpt ?? p.description ?? "",
+              category: p.category ?? "",
+              date: p.date ?? p.publishedAt ?? "",
+              readTime: p.readTime ?? "",
+              author: p.author ?? "",
+            })));
           }
         }
       } catch (error) {
@@ -97,14 +107,14 @@ export const Blog = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {posts.map((post, index: number) => (
             <motion.div
-              key={`${post.blogId || 'post'}-${index}`}
+              key={`${post.blogId ?? post._id ?? index}-${index}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Link
-                href={`/${currentLang}/blog/${slugify(post.title)}-${post.blogId}`}
+                href={`/${currentLang}/blog/${slugify(post.title)}-${post.blogId ?? post._id ?? index}`}
                 className="group bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 w-full block h-full"
               >
                 {/* Image */}
