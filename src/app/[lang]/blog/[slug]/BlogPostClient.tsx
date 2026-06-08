@@ -4,14 +4,17 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getCopy } from "@/lib/copy";
 import { SPACING } from "@/lib/constants";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { localizedPath, siteConfig, type SiteLocale } from "@/lib/site-config";
+import { fetchApiDataClient, API_ENDPOINTS, normalizeLanguage } from "@/lib/api";
+import { Navbar } from "@/components/Navbar";
 
 interface BlogPost {
   blogId: number;
+  id?: number;
   title: string;
   excerpt: string;
   content: string;
@@ -22,17 +25,61 @@ interface BlogPost {
   image: string;
 }
 
-export default function BlogPostClient({
-  post,
-  lang,
-}: {
-  post: BlogPost;
-  lang: string;
-}) {
+function findPost(posts: BlogPost[], slug: string): BlogPost | undefined {
+  const postId = Number(slug.split("-").pop());
+  if (!isNaN(postId)) {
+    const byId = posts.find((p) => p.blogId === postId || p.id === postId);
+    if (byId) return byId;
+  }
+  const slugify = (t: string) =>
+    t.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim();
+  return posts.find((p) => {
+    const s = slugify(p.title);
+    return slug.startsWith(s) || s === slug;
+  });
+}
+
+export default function BlogPostClient({ lang, slug }: { lang: string; slug: string }) {
   const router = useRouter();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const copy = getCopy(lang, "blog");
   const isGe = lang === "ge";
+
+  useEffect(() => {
+    fetchApiDataClient<any>(API_ENDPOINTS.BLOGS, normalizeLanguage(lang)).then((data) => {
+      const posts: BlogPost[] = Array.isArray(data?.posts) ? data.posts : Array.isArray(data?.blogs) ? data.blogs : [];
+      const found = findPost(posts, slug);
+      setPost(found ?? null);
+      setLoading(false);
+    });
+  }, [lang, slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <p className="text-muted-foreground">{isGe ? "Beitrag nicht gefunden" : "Post not found"}</p>
+          <button onClick={() => router.push(`/${lang}/blog`)} className="text-blue-400 hover:underline text-sm">
+            {isGe ? "Zurück zum Blog" : "Back to Blog"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handleShare = async () => {
     const shareData = {
@@ -58,7 +105,9 @@ export default function BlogPostClient({
   };
 
   return (
-    <div className={`min-h-screen ${SPACING.sideMargin} bg-background`}>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <div className={`min-h-screen ${SPACING.sideMargin} bg-background`}>
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -251,6 +300,7 @@ export default function BlogPostClient({
           </button>
         </motion.footer>
       </motion.article>
+      </div>
     </div>
   );
 }
