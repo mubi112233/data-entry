@@ -197,7 +197,7 @@ export default async function RootLayout({
     <html lang={htmlLang} suppressHydrationWarning className="font-sans">
       <head>
         {/* Google Search Console Verification */}
-        <meta name="google-site-verification" content="5fFyGMS1mEaPePVNR1a8gVbMpeqBr9r-S6cR9x0bNEw" />
+        <meta name="google-site-verification" content="kHn3YaAaxdfSd7tm_SRxaBv__HD9W6U6mb0ShMe42xc" />
         
         {/* Performance: Preconnect to external domains */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
